@@ -6,8 +6,8 @@
 <script setup>
 import UserInput from "./components/UserInput.vue";
 
-const handleSubmit = (value) => {
-  console.log(value);
+const handleSubmit = (userInfo) => {
+  console.log(userInfo);
 };
 </script>
 

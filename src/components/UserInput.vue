@@ -50,31 +50,51 @@ const emit = defineEmits({
   },
 });
 
-const height = ref(null);
-const weight = ref(null);
+const height = ref("");
+const weight = ref("");
 const sex = ref("");
+
+const reset = (message) => {
+  alert(message);
+  height.value = "";
+  weight.value = "";
+};
 
 const submit = (evt) => {
   evt.preventDefault();
 
-  height.value = parseInt(height.value);
-  weight.value = parseInt(weight.value);
+  if (
+    height.value.trim() === "" ||
+    weight.value.trim() === "" ||
+    sex.value.trim() === ""
+  ) {
+    reset("Заполните все пропуски");
+    return;
+  }
+
+  const parsedHeight = parseInt(height.value);
+  const parsedWeight = parseInt(weight.value);
+
+  if (isNaN(parsedHeight) || isNaN(parsedWeight)) {
+    reset("Введите числа");
+    return;
+  }
 
   const userInfo = {
-    height: height.value,
-    weight: weight.value,
+    height: parsedHeight,
+    weight: parsedWeight,
     sex: sex.value,
   };
 
-  Object.entries(userInfo).forEach(([key, value]) => {
-    if (value === "") {
-      alert("Заполните все пропуски");
-      height.value = "";
-      weight.value = "";
-      sex.value = "";
-      return;
-    }
-  });
+  // Object.entries(userInfo).forEach(([key, value]) => {
+  //   if (value === "") {
+  //     alert("Заполните все пропуски");
+  //     height.value = "";
+  //     weight.value = "";
+  //     sex.value = "";
+  //     return;
+  //   }
+  // });
 
   emit("submit", userInfo);
 };
