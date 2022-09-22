@@ -1,10 +1,14 @@
 <template>
-  <h1>your weight</h1>
-  <user-input></user-input>
+  <h1>yourweight</h1>
+  <user-input @submit="handleSubmit"></user-input>
 </template>
 
 <script setup>
 import UserInput from "./components/UserInput.vue";
+
+const handleSubmit = (value) => {
+  console.log(value);
+};
 </script>
 
 <style lang="scss">

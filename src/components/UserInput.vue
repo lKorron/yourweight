@@ -1,27 +1,33 @@
 <template>
   <div class="user-input">
-    <form>
+    <form @submit="submit" @keydown.enter="submit">
       <div class="user-input__height">
         <label for="height">Ваш рост</label>
-        <input type="text" id="height" name="height" />
-        м
+        <input v-model="height" type="text" id="height" name="height" />
+        см
       </div>
       <div class="user-input__weight">
         <label for="weight">Ваш вес</label>
-        <input type="text" id="weight" name="weight" />
+        <input v-model="weight" type="text" id="weight" name="weight" />
         кг
       </div>
 
       <div class="user-input__sex sex">
         <div class="sex__name">Пол</div>
-        <input type="radio" name="sex" id="male" />
+        <input v-model="sex" type="radio" name="sex" id="male" value="male" />
         <label for="male">Мужской</label>
 
-        <input type="radio" name="sex" id="female" />
+        <input
+          v-model="sex"
+          type="radio"
+          name="sex"
+          id="female"
+          value="female"
+        />
         <label for="female">Женский</label>
       </div>
 
-      <button @click="click">Готово</button>
+      <button>Готово</button>
     </form>
   </div>
 </template>
@@ -33,9 +39,44 @@ export default {
 </script>
 
 <script setup>
-let click = (evt) => {
+import { ref, defineEmits } from "vue";
+
+const emit = defineEmits({
+  submit: (userInfo) => {
+    if (userInfo.height && userInfo.weight && userInfo.sex) {
+      return true;
+    }
+    return false;
+  },
+});
+
+const height = ref(null);
+const weight = ref(null);
+const sex = ref("");
+
+const submit = (evt) => {
   evt.preventDefault();
-  console.log("clicked");
+
+  height.value = parseInt(height.value);
+  weight.value = parseInt(weight.value);
+
+  const userInfo = {
+    height: height.value,
+    weight: weight.value,
+    sex: sex.value,
+  };
+
+  Object.entries(userInfo).forEach(([key, value]) => {
+    if (value === "") {
+      alert("Заполните все пропуски");
+      height.value = "";
+      weight.value = "";
+      sex.value = "";
+      return;
+    }
+  });
+
+  emit("submit", userInfo);
 };
 </script>
 
