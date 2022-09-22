@@ -1,7 +1,11 @@
 <template>
-  <nav></nav>
-  <router-view />
+  <h1>your weight</h1>
+  <user-input></user-input>
 </template>
+
+<script setup>
+import UserInput from "./components/UserInput.vue";
+</script>
 
 <style lang="scss">
 #app {
@@ -10,6 +14,14 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+body {
+  $bg-size: 370px;
+  background-color: #fff;
+  background-image: url("./assets/background.jpeg");
+  background-repeat: repeat;
+  background-size: $bg-size;
 }
 
 nav {
@@ -23,5 +35,9 @@ nav {
       color: #42b983;
     }
   }
+}
+
+button {
+  cursor: pointer;
 }
 </style>
