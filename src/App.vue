@@ -1,10 +1,28 @@
 <template>
   <h1>yourweight</h1>
-  <user-input @submit="handleSubmit"></user-input>
+  <async-popup ref="inputPopup">
+    <user-input @submit="handleSubmit"></user-input>
+  </async-popup>
 </template>
 
 <script setup>
 import UserInput from "./components/UserInput.vue";
+import AsyncPopup from "./components/AsyncPopup.vue";
+import { ref, onMounted } from "vue";
+
+onMounted(() => {
+  openPopup();
+});
+
+const inputPopup = ref(null);
+
+const openPopup = async () => {
+  const popupResult = await inputPopup.value.open();
+
+  if (popupResult) {
+    console.log("resulted");
+  }
+};
 
 const handleSubmit = (userInfo) => {
   console.log(userInfo);
