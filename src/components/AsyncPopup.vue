@@ -1,18 +1,21 @@
 <template>
-  <div v-if="isOpen" class="backdrop" @click="close">
-    <div class="popup" @click.stop>
-      <h2 class="popup__header"><slot name="header">Заголовок</slot></h2>
-      <div class="popup__content">
-        <slot
-          >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui
-          reprehenderit dolor et aut nostrum quisquam, nisi earum mollitia hic,
-          impedit saepe! Reiciendis ipsam atque minima ducimus doloremque omnis
-          iure quos.</slot
-        >
+  <Transition name="popup" appear>
+    <div v-if="isOpen" class="backdrop" @click="close">
+      <div class="popup" @click.stop>
+        <h2 class="popup__header"><slot name="header">Заголовок</slot></h2>
+        <div class="popup__content">
+          <slot
+            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui
+            reprehenderit dolor et aut nostrum quisquam, nisi earum mollitia
+            hic, impedit saepe! Reiciendis ipsam atque minima ducimus doloremque
+            omnis iure quos.</slot
+          >
+        </div>
+
+        <slot name="button"><button @click="close">Закрыть</button></slot>
       </div>
-      <button @click="close">Закрыть</button>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <script>
@@ -53,6 +56,7 @@ export default {
     close() {
       this.$options.popupController.resolve(true);
       this.isOpen = false;
+      //emit
     },
     handleKeydown(evt) {
       if (evt.key === "Escape" && this.isOpen) {
@@ -100,5 +104,15 @@ export default {
     padding-left: 20px;
     padding-right: 20px;
   }
+}
+
+.popup-enter-active,
+.popup-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.popup-enter-from,
+.popup-leave-to {
+  transform: translateY(-100%) scale(0);
 }
 </style>

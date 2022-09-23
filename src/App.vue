@@ -1,31 +1,59 @@
 <template>
   <h1>yourweight</h1>
+  <button @click="openInputPopup">Открыть попап</button>
   <async-popup ref="inputPopup">
-    <user-input @submit="handleSubmit"></user-input>
+    <template #header> Данные пользователя </template>
+    <template #default>
+      <user-input @submit="handleSubmit"></user-input
+    ></template>
+    <template #button> <div></div></template>
   </async-popup>
+  <async-popup ref="purposePopup">
+    <template #header> Желаемый вес </template>
+    <template #default> <purpose-input></purpose-input></template>
+    <template #button> <div></div></template>
+  </async-popup>
+
+  <div>{{ userData?.weight }}</div>
 </template>
 
 <script setup>
 import UserInput from "./components/UserInput.vue";
+import PurposeInput from "./components/PurposeInput.vue";
 import AsyncPopup from "./components/AsyncPopup.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 
 onMounted(() => {
-  openPopup();
+  openPurposePopup();
 });
 
 const inputPopup = ref(null);
+const purposePopup = ref(null);
 
-const openPopup = async () => {
+const openInputPopup = async () => {
   const popupResult = await inputPopup.value.open();
 
   if (popupResult) {
-    console.log("resulted");
+    openPurposePopup();
   }
 };
 
-const handleSubmit = (userInfo) => {
-  console.log(userInfo);
+const openPurposePopup = async () => {
+  const popupResult = await purposePopup.value.open();
+
+  if (popupResult) {
+    //code
+  }
+};
+
+let userData = reactive({ height: null, weight: null, sex: null });
+
+const handleSubmit = (userObject) => {
+  inputPopup.value.close();
+
+  Object.entries(userObject).forEach(([key, value]) => {
+    userData[key] = value;
+  });
 };
 </script>
 
