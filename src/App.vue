@@ -1,20 +1,19 @@
 <template>
   <h1>yourweight</h1>
-  <button @click="openInputPopup">Открыть попап</button>
-  <async-popup ref="inputPopup">
+  <async-popup ref="inputPopup" ignoreKeys>
     <template #header> Данные пользователя </template>
     <template #default>
       <user-input @submit="handleSubmit"></user-input
     ></template>
     <template #button> <div></div></template>
   </async-popup>
-  <async-popup ref="purposePopup">
+  <async-popup ref="purposePopup" ignoreKeys>
     <template #header> Желаемый вес </template>
-    <template #default> <purpose-input></purpose-input></template>
+    <template #default>
+      <purpose-input @submit="handleSubmit"></purpose-input
+    ></template>
     <template #button> <div></div></template>
   </async-popup>
-
-  <div>{{ userData?.weight }}</div>
 </template>
 
 <script setup>
@@ -24,7 +23,7 @@ import AsyncPopup from "./components/AsyncPopup.vue";
 import { ref, onMounted, reactive } from "vue";
 
 onMounted(() => {
-  openPurposePopup();
+  openInputPopup();
 });
 
 const inputPopup = ref(null);
@@ -46,14 +45,22 @@ const openPurposePopup = async () => {
   }
 };
 
-let userData = reactive({ height: null, weight: null, sex: null });
+let userData = reactive({
+  height: null,
+  weight: null,
+  sex: null,
+  targetWeight: null,
+});
 
 const handleSubmit = (userObject) => {
   inputPopup.value.close();
+  purposePopup.value.close();
 
   Object.entries(userObject).forEach(([key, value]) => {
     userData[key] = value;
   });
+
+  console.log(userData);
 };
 </script>
 

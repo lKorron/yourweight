@@ -105,7 +105,6 @@ const submit = (evt) => {
 
 .user-input {
   background-color: #fff;
-  max-width: 800px;
   margin: 0 auto;
   border: 1px solid $mainColor;
   border-radius: 10px;

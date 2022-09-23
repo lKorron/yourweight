@@ -1,7 +1,12 @@
 <template>
-  <form @submit="submit" class="purpose-input">
-    <label for="weight">Желаемый вес</label>
-    <input v-model="weight" type="text" name="weight" /> кг
+  <form @submit="submit" @keydown.enter="submit" class="purpose-input">
+    <div class="purpose-input__label">
+      <label for="weight">Введите вес, который хотите получить</label>
+    </div>
+
+    <div class="purpose-input__input">
+      <input v-model="weight" type="text" name="weight" /> кг
+    </div>
 
     <button>ок</button>
   </form>
@@ -11,7 +16,7 @@
 import { ref, defineEmits } from "vue";
 
 const emit = defineEmits({
-  submit: (value) => typeof value === "string",
+  submit: (value) => typeof value === "object",
 });
 
 const weight = ref(null);
@@ -19,9 +24,30 @@ const weight = ref(null);
 const submit = (evt) => {
   evt.preventDefault();
 
-  console.log(weight.value);
-  emit("submit", weight.value);
+  const parsedWeight = parseInt(weight.value);
+
+  if (isNaN(parsedWeight)) {
+    alert("Введите числовые значения!");
+    return;
+  }
+
+  const purposeInfo = {
+    targetWeight: weight.value,
+  };
+
+  emit("submit", purposeInfo);
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.purpose-input {
+  input {
+    width: 30px;
+    margin-left: 18px;
+  }
+
+  > :not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+</style>

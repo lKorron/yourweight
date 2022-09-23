@@ -1,6 +1,6 @@
 <template>
   <Transition name="popup" appear>
-    <div v-if="isOpen" class="backdrop" @click="close">
+    <div v-if="isOpen" class="backdrop" @click="ignoreKeys ? '' : close()">
       <div class="popup" @click.stop>
         <h2 class="popup__header"><slot name="header">Заголовок</slot></h2>
         <div class="popup__content">
@@ -20,6 +20,12 @@
 
 <script>
 export default {
+  props: {
+    ignoreKeys: {
+      type: Boolean,
+    },
+  },
+
   popupController: null,
 
   mounted() {
@@ -59,6 +65,10 @@ export default {
       //emit
     },
     handleKeydown(evt) {
+      if (this.ignoreKeys) {
+        return;
+      }
+
       if (evt.key === "Escape" && this.isOpen) {
         this.close();
       }
