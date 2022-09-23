@@ -15,7 +15,7 @@
     <template #button> <div></div></template>
   </async-popup>
 
-  <main-panel :userData="userData"></main-panel>
+  <main-panel v-if="isDataAvailable" :userData="userData"></main-panel>
 </template>
 
 <script setup>
@@ -23,12 +23,33 @@ import UserInput from "./components/UserInput.vue";
 import PurposeInput from "./components/PurposeInput.vue";
 import AsyncPopup from "./components/AsyncPopup.vue";
 import MainPanel from "./components/MainPanel.vue";
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted, reactive, computed } from "vue";
 
 onMounted(() => {
-  () => openInputPopup();
+  openInputPopup();
 });
 
+// Data
+let userData = reactive({
+  height: null,
+  weight: null,
+  sex: null,
+  targetWeight: null,
+});
+
+const isDataAvailable = computed(() => {
+  let result = true;
+
+  Object.entries(userData).forEach(([, value]) => {
+    if (value === null) {
+      result = false;
+    }
+  });
+
+  return result;
+});
+
+// Popups
 const inputPopup = ref(null);
 const purposePopup = ref(null);
 
@@ -47,13 +68,6 @@ const openPurposePopup = async () => {
     //code
   }
 };
-
-let userData = reactive({
-  height: null,
-  weight: null,
-  sex: null,
-  targetWeight: null,
-});
 
 const handleSubmit = (userObject) => {
   inputPopup.value.close();

@@ -34,10 +34,15 @@ const props = defineProps({
 });
 
 const { userData } = toRefs(props);
+
+//const { weigth, targetWeight } = userData;
+
+console.log(userData.sex);
 </script>
 
 <style lang="scss">
 @import "../styles/_mixins.scss";
+
 .main-panel {
   @include setPlane(800px);
 
