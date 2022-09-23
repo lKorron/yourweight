@@ -79,6 +79,7 @@ export default {
 
 <style lang="scss">
 @import "../styles/_variables.scss";
+@import "../styles/_mixins.scss";
 
 .backdrop {
   position: fixed;
@@ -92,14 +93,11 @@ export default {
 }
 
 .popup {
-  background-color: #fff;
-  max-width: 500px;
+  @include setPlane($maxWidth: 500px);
   margin-top: 100px;
   margin-left: 10px;
   margin-right: 10px;
   padding: 20px;
-  border: 1px solid $mainColor;
-  border-radius: 10px;
 
   &__content {
     margin-bottom: 20px;

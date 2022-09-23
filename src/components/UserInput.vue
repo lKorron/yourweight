@@ -104,8 +104,6 @@ const submit = (evt) => {
 @import "@/styles/_variables.scss";
 
 .user-input {
-  background-color: #fff;
-  margin: 0 auto;
   border: 1px solid $mainColor;
   border-radius: 10px;
   padding: 10px;

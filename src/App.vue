@@ -14,16 +14,19 @@
     ></template>
     <template #button> <div></div></template>
   </async-popup>
+
+  <main-panel :userData="userData"></main-panel>
 </template>
 
 <script setup>
 import UserInput from "./components/UserInput.vue";
 import PurposeInput from "./components/PurposeInput.vue";
 import AsyncPopup from "./components/AsyncPopup.vue";
+import MainPanel from "./components/MainPanel.vue";
 import { ref, onMounted, reactive } from "vue";
 
 onMounted(() => {
-  openInputPopup();
+  () => openInputPopup();
 });
 
 const inputPopup = ref(null);
