@@ -1,23 +1,32 @@
 <template>
   <div class="user-input">
-    <form @submit="submit" @keydown.enter="submit">
+    <Form @submit="onSubmit">
       <div class="user-input__height">
         <label for="height">Ваш рост</label>
-        <input v-model="height" type="text" id="height" name="height" />
+        <Field
+          v-model="height"
+          type="text"
+          id="height"
+          name="height"
+          :rules="{ between: { min: 1, max: 500 } }"
+        />
         см
       </div>
+      <ErrorMessage name="height" v-slot="{ message }">
+        <span class="error-message">{{ message }}</span>
+      </ErrorMessage>
       <div class="user-input__weight">
         <label for="weight">Ваш вес</label>
-        <input v-model="weight" type="text" id="weight" name="weight" />
+        <Field v-model="weight" type="text" id="weight" name="weight" />
         кг
       </div>
 
       <div class="user-input__sex sex">
         <div class="sex__name">Пол</div>
-        <input v-model="sex" type="radio" name="sex" id="male" value="male" />
+        <Field v-model="sex" type="radio" name="sex" id="male" value="male" />
         <label for="male">Мужской</label>
 
-        <input
+        <Field
           v-model="sex"
           type="radio"
           name="sex"
@@ -26,9 +35,9 @@
         />
         <label for="female">Женский</label>
       </div>
-
+      <div>Ввдеите числовые значения</div>
       <button>Готово</button>
-    </form>
+    </Form>
   </div>
 </template>
 
@@ -40,6 +49,10 @@ export default {
 
 <script setup>
 import { ref, defineEmits } from "vue";
+import { Form, Field, defineRule, ErrorMessage } from "vee-validate";
+import { digits } from "@vee-validate/rules";
+
+defineRule("digits", digits);
 
 const emit = defineEmits({
   submit: (userInfo) => {
@@ -60,48 +73,59 @@ const reset = (message) => {
   weight.value = "";
 };
 
-const submit = (evt) => {
-  evt.preventDefault();
-
-  if (
-    height.value.trim() === "" ||
-    weight.value.trim() === "" ||
-    sex.value.trim() === ""
-  ) {
-    reset("Заполните все пропуски");
+function onSubmit(values) {
+  if (Object.values(values).includes("")) {
+    alert("Заполните все поля!");
     return;
   }
+}
 
-  const parsedHeight = parseInt(height.value);
-  const parsedWeight = parseInt(weight.value);
+// const submit = (evt) => {
+//   evt.preventDefault();
 
-  if (isNaN(parsedHeight) || isNaN(parsedWeight)) {
-    reset("Введите числа");
-    return;
-  }
+//   if (
+//     height.value.trim() === "" ||
+//     weight.value.trim() === "" ||
+//     sex.value.trim() === ""
+//   ) {
+//     reset("Заполните все пропуски");
+//     return;
+//   }
 
-  const userInfo = {
-    height: parsedHeight,
-    weight: parsedWeight,
-    sex: sex.value,
-  };
+//   const parsedHeight = parseInt(height.value);
+//   const parsedWeight = parseInt(weight.value);
 
-  // Object.entries(userInfo).forEach(([key, value]) => {
-  //   if (value === "") {
-  //     alert("Заполните все пропуски");
-  //     height.value = "";
-  //     weight.value = "";
-  //     sex.value = "";
-  //     return;
-  //   }
-  // });
+//   if (isNaN(parsedHeight) || isNaN(parsedWeight)) {
+//     reset("Введите числа");
+//     return;
+//   }
 
-  emit("submit", userInfo);
-};
+//   const userInfo = {
+//     height: parsedHeight,
+//     weight: parsedWeight,
+//     sex: sex.value,
+//   };
+
+//   // Object.entries(userInfo).forEach(([key, value]) => {
+//   //   if (value === "") {
+//   //     alert("Заполните все пропуски");
+//   //     height.value = "";
+//   //     weight.value = "";
+//   //     sex.value = "";
+//   //     return;
+//   //   }
+//   // });
+
+//   emit("submit", userInfo);
+// };
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/_variables.scss";
+
+.error-message {
+  color: red;
+}
 
 .user-input {
   border: 1px solid $mainColor;
