@@ -1,19 +1,23 @@
 <template>
-  <form @submit="submit" @keydown.enter="submit" class="purpose-input">
+  <Form @submit="onSubmit" class="purpose-input">
     <div class="purpose-input__label">
       <label for="weight">Введите вес, который хотите получить</label>
     </div>
 
     <div class="purpose-input__input">
-      <input v-model="weight" type="text" name="weight" /> кг
+      <Field v-model="weight" type="text" name="weight" rules="number" /> кг
+      <ErrorMessage name="weight" v-slot="{ message }">
+        <div class="error-message">{{ message }}</div>
+      </ErrorMessage>
     </div>
 
     <button>ок</button>
-  </form>
+  </Form>
 </template>
 
 <script setup>
 import { ref, defineEmits } from "vue";
+import { Form, Field, ErrorMessage } from "vee-validate";
 
 const emit = defineEmits({
   submit: (value) => typeof value === "object",
@@ -21,15 +25,8 @@ const emit = defineEmits({
 
 const weight = ref(null);
 
-const submit = (evt) => {
-  evt.preventDefault();
-
+const onSubmit = () => {
   const parsedWeight = parseInt(weight.value);
-
-  if (isNaN(parsedWeight)) {
-    alert("Введите числовые значения!");
-    return;
-  }
 
   const purposeInfo = {
     targetWeight: weight.value,
@@ -39,7 +36,7 @@ const submit = (evt) => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .purpose-input {
   input {
     width: 30px;
@@ -49,5 +46,9 @@ const submit = (evt) => {
   > :not(:last-child) {
     margin-bottom: 10px;
   }
+}
+
+.error-message {
+  color: red;
 }
 </style>

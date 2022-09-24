@@ -39,7 +39,7 @@
           name="sex"
           id="male"
           value="male"
-          rules="required"
+          rules="sex"
         />
         <label for="male">Мужской</label>
 
