@@ -5,19 +5,19 @@
       <div class="main-panel__numerical">
         <div class="main-panel__weight">
           <h3>Текущий вес</h3>
-          <div>{{ userData.weight }}65</div>
+          <div>{{ userData.weight }} кг</div>
         </div>
         <div class="main-panel__target-weight">
           <h3>Целевой вес</h3>
-          <div>{{ userData.targetWeight }}70</div>
+          <div>{{ userData.targetWeight }} кг</div>
         </div>
       </div>
       <div class="main-panel__progress">
         <circle-progress
-          :percent="40"
+          :percent="complitionPercent"
           :fill-color="'#31fe1d'"
-          show-percent
           :transition="200"
+          show-percent
         />
       </div>
     </div>
@@ -27,17 +27,30 @@
 <script setup>
 import "vue3-circle-progress/dist/circle-progress.css";
 import CircleProgress from "vue3-circle-progress";
-import { defineProps, toRefs } from "vue";
+import { defineProps, computed, ref } from "vue";
 
 const props = defineProps({
   userData: Object,
 });
 
-const { userData } = toRefs(props);
+const weight = ref(props.userData.weight);
+const targetWeight = ref(props.userData.targetWeight);
 
 //const { weigth, targetWeight } = userData;
 
-console.log(userData.sex);
+console.log(weight.value, targetWeight.value);
+
+const complitionPercent = computed(() => {
+  if (!weight.value || !targetWeight.value) {
+    return 0;
+  }
+
+  if (targetWeight.value > weight.value) {
+    return Math.round((weight.value / targetWeight.value) * 100);
+  } else {
+    return Math.round((targetWeight.value / weight.value) * 100);
+  }
+});
 </script>
 
 <style lang="scss">
