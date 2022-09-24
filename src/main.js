@@ -4,16 +4,23 @@ import router from "./router";
 import store from "./store";
 
 import { defineRule, configure } from "vee-validate";
-import { required, email, min, digits, between } from "@vee-validate/rules";
 
 configure({
   validateOnInput: true,
 });
 
-defineRule("required", required);
-defineRule("email", email);
-defineRule("min", min);
-defineRule("digits", digits);
-defineRule("between", between);
+defineRule("number", (value) => {
+  const parsedValue = parseInt(value);
+
+  if (isNaN(parsedValue)) {
+    return "Введите числовое значение";
+  }
+
+  if (parsedValue < 0) {
+    return "Значение не должно быть отрицательным";
+  }
+
+  return true;
+});
 
 createApp(App).use(store).use(router).mount("#app");
