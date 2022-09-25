@@ -16,7 +16,7 @@
   </async-popup>
 
   <content-panel v-if="isDataAvailable">
-    <template #header>Текущий прогресс</template>
+    <template #header>Общий прогресс</template>
     <template #default
       ><current-state
         :weight="userData.weight"
