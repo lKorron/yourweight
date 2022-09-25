@@ -145,8 +145,6 @@ watch(age, () => {
 });
 
 function onSubmit(values) {
-  console.log(typeof coeff.value);
-
   const parsedHeight = parseInt(height.value);
   const parsedWeight = parseInt(weight.value);
   const parsedAge = parseInt(age.value);

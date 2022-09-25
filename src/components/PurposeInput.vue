@@ -29,7 +29,7 @@ const onSubmit = () => {
   const parsedWeight = parseInt(weight.value);
 
   const purposeInfo = {
-    targetWeight: weight.value,
+    targetWeight: parsedWeight,
   };
 
   emit("submit", purposeInfo);

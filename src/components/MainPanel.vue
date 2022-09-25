@@ -38,8 +38,6 @@ const targetWeight = ref(props.userData.targetWeight);
 
 //const { weigth, targetWeight } = userData;
 
-console.log(weight.value, targetWeight.value);
-
 const complitionPercent = computed(() => {
   if (!weight.value || !targetWeight.value) {
     return 0;
