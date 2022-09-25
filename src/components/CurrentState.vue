@@ -4,11 +4,11 @@
       <div class="current-state__numerical">
         <div class="current-state__weight">
           <h3>Текущий вес</h3>
-          <div>{{ userData.weight }} кг</div>
+          <div>{{ weight }} кг</div>
         </div>
         <div class="current-state__target-weight">
           <h3>Целевой вес</h3>
-          <div>{{ userData.targetWeight }} кг</div>
+          <div>{{ targetWeight }} кг</div>
         </div>
       </div>
       <div class="current-state__progress">
@@ -26,16 +26,16 @@
 <script setup>
 import "vue3-circle-progress/dist/circle-progress.css";
 import CircleProgress from "vue3-circle-progress";
-import { defineProps, computed, ref } from "vue";
+import { defineProps, computed, toRefs } from "vue";
 
 const props = defineProps({
-  userData: Object,
+  weight: Number,
+  targetWeight: Number,
 });
 
-const weight = ref(props.userData.weight);
-const targetWeight = ref(props.userData.targetWeight);
+const { weight, targetWeight } = toRefs(props);
 
-//const { weigth, targetWeight } = userData;
+console.log(weight.value, targetWeight.value);
 
 const complitionPercent = computed(() => {
   if (!weight.value || !targetWeight.value) {

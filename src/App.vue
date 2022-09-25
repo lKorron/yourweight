@@ -18,7 +18,10 @@
   <content-panel v-if="isDataAvailable">
     <template #header>Текущий прогресс</template>
     <template #default
-      ><current-state :userData="userData"></current-state
+      ><current-state
+        :weight="userData.weight"
+        :targetWeight="userData.targetWeight"
+      ></current-state
     ></template>
   </content-panel>
 
