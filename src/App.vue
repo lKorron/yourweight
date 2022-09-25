@@ -15,10 +15,11 @@
     <template #button> <div></div></template>
   </async-popup>
 
-  <main-panel v-if="!isDataAvailable" :userData="userData"></main-panel>
-  <content-panel>
-    <template #header>Расчет калорий</template>
-    <template #default></template>
+  <content-panel v-if="isDataAvailable">
+    <template #header>Текущие показатели</template>
+    <template #default
+      ><current-state :userData="userData"></current-state
+    ></template>
   </content-panel>
 </template>
 
@@ -26,12 +27,12 @@
 import UserInput from "./components/UserInput.vue";
 import PurposeInput from "./components/PurposeInput.vue";
 import AsyncPopup from "./components/AsyncPopup.vue";
-import MainPanel from "./components/MainPanel.vue";
+import CurrentState from "./components/CurrentState.vue";
 import ContentPanel from "./components/ContentPanel.vue";
 import { ref, onMounted, reactive, computed } from "vue";
 
 onMounted(() => {
-  //openInputPopup();
+  openInputPopup();
 });
 
 // Data

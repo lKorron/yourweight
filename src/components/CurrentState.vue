@@ -1,18 +1,17 @@
 <template>
-  <div class="main-panel">
-    <h2 class="main-panel__header">Показатели на сегодня</h2>
-    <div class="main-panel__body">
-      <div class="main-panel__numerical">
-        <div class="main-panel__weight">
+  <div class="current-state">
+    <div class="current-state__body">
+      <div class="current-state__numerical">
+        <div class="current-state__weight">
           <h3>Текущий вес</h3>
           <div>{{ userData.weight }} кг</div>
         </div>
-        <div class="main-panel__target-weight">
+        <div class="current-state__target-weight">
           <h3>Целевой вес</h3>
           <div>{{ userData.targetWeight }} кг</div>
         </div>
       </div>
-      <div class="main-panel__progress">
+      <div class="current-state__progress">
         <circle-progress
           :percent="complitionPercent"
           :fill-color="'#31fe1d'"
@@ -54,14 +53,7 @@ const complitionPercent = computed(() => {
 <style lang="scss">
 @import "../styles/_mixins.scss";
 
-.main-panel {
-  @include setPlane(800px);
-  margin-bottom: 30px;
-
-  &__header {
-    text-decoration: underline;
-  }
-
+.current-state {
   &__body {
     display: grid;
     grid-template-columns: 1fr 1fr;
