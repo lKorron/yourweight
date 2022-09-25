@@ -35,8 +35,6 @@ const props = defineProps({
 
 const { weight, targetWeight } = toRefs(props);
 
-console.log(weight.value, targetWeight.value);
-
 const complitionPercent = computed(() => {
   if (!weight.value || !targetWeight.value) {
     return 0;

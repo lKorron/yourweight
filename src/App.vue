@@ -31,6 +31,7 @@
       ><calculated-calories
         :height="userData.height"
         :weight="userData.weight"
+        :age="userData.age"
         :targetWeight="userData.targetWeight"
         :coeff="userData.coeff"
         :sex="userData.sex"
