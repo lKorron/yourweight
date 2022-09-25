@@ -16,9 +16,22 @@
   </async-popup>
 
   <content-panel v-if="isDataAvailable">
-    <template #header>Текущие показатели</template>
+    <template #header>Текущий прогресс</template>
     <template #default
       ><current-state :userData="userData"></current-state
+    ></template>
+  </content-panel>
+
+  <content-panel v-if="isDataAvailable">
+    <template #header>Расчет калорий</template>
+    <template #default
+      ><calculated-calories
+        :height="userData.height"
+        :weight="userData.weight"
+        :targetWeight="userData.targetWeight"
+        :coeff="userData.coeff"
+        :sex="userData.sex"
+      ></calculated-calories
     ></template>
   </content-panel>
 </template>
@@ -27,8 +40,9 @@
 import UserInput from "./components/UserInput.vue";
 import PurposeInput from "./components/PurposeInput.vue";
 import AsyncPopup from "./components/AsyncPopup.vue";
-import CurrentState from "./components/CurrentState.vue";
 import ContentPanel from "./components/ContentPanel.vue";
+import CurrentState from "./components/CurrentState.vue";
+import CalculatedCalories from "./components/CalculatedCalories.vue";
 import { ref, onMounted, reactive, computed } from "vue";
 
 onMounted(() => {

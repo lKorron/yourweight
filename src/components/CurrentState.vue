@@ -57,7 +57,6 @@ const complitionPercent = computed(() => {
   &__body {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-bottom: 40px;
   }
 
   &__progress {

@@ -28,6 +28,10 @@
   &__header {
     text-decoration: underline;
   }
+
+  &__content {
+    margin-bottom: 40px;
+  }
 }
 
 .content-enter-active,
