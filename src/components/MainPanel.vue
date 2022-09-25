@@ -56,6 +56,7 @@ const complitionPercent = computed(() => {
 
 .main-panel {
   @include setPlane(800px);
+  margin-bottom: 30px;
 
   &__header {
     text-decoration: underline;
