@@ -1,13 +1,26 @@
 export default function (axiosInstance) {
   return {
-    search() {
+    search(query) {
       return axiosInstance
-        .get("search/instant?query=cheese")
+        .get("search/instant", {
+          params: {
+            query,
+            branded: false,
+          },
+        })
         .catch((error) => console.log(error));
     },
-    getNutriens(payload) {
+    nutriens(query) {
       return axiosInstance
-        .post("natural/nutrients", payload)
+        .post(
+          "natural/nutrients",
+          { query },
+          {
+            headers: {
+              "x-remote-user-id": "0",
+            },
+          }
+        )
         .catch((error) => console.log(error));
     },
   };
