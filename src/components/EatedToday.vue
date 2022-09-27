@@ -1,10 +1,12 @@
 <template>Я сегодня съел много чего</template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, inject } from "vue";
+
+const api = inject("api");
 
 onMounted(() => {
-  getData();
+  api.nutritionix.search().then((response) => console.log(response));
 });
 
 function getData() {
@@ -32,17 +34,17 @@ function getData() {
     },
   };
 
-  //   axios
-  //     .get(
-  //       "https://trackapi.nutritionix.com/v2/search/instant?query=cheese",
-  //       options
-  //     )
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.error(error);
-  //     });
+  axios
+    .get(
+      "https://trackapi.nutritionix.com/v2/search/instant?query=cheese",
+      options
+    )
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 
   axios
     .post(

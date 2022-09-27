@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import apiPlugin from "./plugins/api";
 
 import { defineRule, configure } from "vee-validate";
 
@@ -23,4 +24,4 @@ defineRule("number", (value) => {
   return true;
 });
 
-createApp(App).use(store).use(router).mount("#app");
+createApp(App).use(store).use(router).use(apiPlugin).mount("#app");
