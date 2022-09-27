@@ -8,3 +8,12 @@
     margin: 0 auto;
 }
 
+@mixin sizeImgContainer($size: 300px) {
+    width: $size;
+    height: $size;
+  
+    > img {
+      width: $size;
+      height: $size;
+    }
+  }
