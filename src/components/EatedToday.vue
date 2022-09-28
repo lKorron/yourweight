@@ -30,17 +30,28 @@
 import { onMounted, inject, ref, watch } from "vue";
 
 const api = inject("api");
+const load = inject("load");
 
 const searchText = ref("");
+let data = ref(null);
 
 watch(searchText, (textValue) => {
-  api.nutritionix.search(textValue).then((val) => console.log(val));
+  //load(api.nutritionix.search(textValue).then((val) => console.log(val)));
+  loadData("milk");
 });
 
 onMounted(() => {
   //api.nutritionix.search("milk").then((response) => console.log(response));
   //api.nutritionix.nutriens("milk").then((res) => console.log(res));
 });
+
+const loadData = (name) => {
+  load(async () => {
+    const response = await api.nutritionix.nutriens(name);
+    data.value = response;
+    console.log(data.value);
+  });
+};
 </script>
 
 <style lang="scss" scoped>
