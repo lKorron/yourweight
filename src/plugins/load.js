@@ -10,7 +10,7 @@ export default {
           errorHandler(error);
         } else {
           console.log("error");
-          console.log(error.response.data);
+          console.log(error);
         }
       }
     };

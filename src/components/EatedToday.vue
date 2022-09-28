@@ -14,12 +14,18 @@
           <img src="../assets/loupe.png" alt="loupe" />
         </div>
       </div>
-      <div class="dropdown">
+      <div class="dropdown" v-show="isDropdownActive">
         <ul class="dropdown__list">
-          <li class="dropdown__item item">Элемент</li>
-          <li class="dropdown__item item">Элемент</li>
-          <li class="dropdown__item item">Элемент</li>
-          <li class="dropdown__item item">Элемент</li>
+          {{
+            searchedItems.length
+          }}
+          <li
+            class="dropdown__item item"
+            v-for="item in searchedItems"
+            :key="item.foodName"
+          >
+            {{ item.foodName }}
+          </li>
         </ul>
       </div>
     </div>
@@ -27,29 +33,53 @@
 </template>
 
 <script setup>
-import { onMounted, inject, ref, watch } from "vue";
+import { onMounted, inject, ref, watch, computed } from "vue";
 
 const api = inject("api");
 const load = inject("load");
 
+let searchedItems = ref([]);
+const searchedItemsCount = 5;
+
 const searchText = ref("");
-let data = ref(null);
+
+const isDropdownActive = computed(() => {
+  if (searchedItems.value.length > 0) {
+    return true;
+  }
+
+  return false;
+});
 
 watch(searchText, (textValue) => {
-  //load(api.nutritionix.search(textValue).then((val) => console.log(val)));
-  loadData("milk");
+  loadSearchedItems(textValue);
 });
 
-onMounted(() => {
-  //api.nutritionix.search("milk").then((response) => console.log(response));
-  //api.nutritionix.nutriens("milk").then((res) => console.log(res));
-});
+const loadSearchedItems = (name) => {
+  searchedItems.value = [];
 
-const loadData = (name) => {
+  if (name === "") {
+    return;
+  }
+
   load(async () => {
-    const response = await api.nutritionix.nutriens(name);
-    data.value = response;
-    console.log(data.value);
+    const response = await api.nutritionix.search(name);
+
+    const valuesArray = Object.values(response.data.common);
+
+    if (valuesArray.length <= 0) {
+      return;
+    }
+
+    searchedItems.value = [];
+    for (let i = 0; i < searchedItemsCount; i++) {
+      const { food_name, photo } = valuesArray[i];
+
+      searchedItems.value.push({
+        foodName: food_name,
+        photoUrl: photo.thumb,
+      });
+    }
   });
 };
 </script>
