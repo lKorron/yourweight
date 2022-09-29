@@ -16,15 +16,15 @@
       </div>
       <div class="dropdown" v-show="isDropdownActive">
         <ul class="dropdown__list">
-          {{
-            searchedItems.length
-          }}
           <li
             class="dropdown__item item"
             v-for="item in searchedItems"
             :key="item.foodName"
           >
-            {{ item.foodName }}
+            <div class="item__image">
+              <img @load="onImageLoad" :src="item.photoUrl" alt="image" />
+            </div>
+            <div class="item__name">{{ item.foodName }}</div>
           </li>
         </ul>
       </div>
@@ -36,23 +36,39 @@
 import { onMounted, inject, ref, watch, computed } from "vue";
 
 const api = inject("api");
-const load = inject("load");
+const loadApi = inject("load");
 
-let searchedItems = ref([]);
+let searchedItems = ref([
+  {
+    foodName: "Еда1",
+    photoUrl: "https://nix-tag-images.s3.amazonaws.com/530_thumb.jpg",
+  },
+  {
+    foodName: "Еда2",
+    photoUrl: "https://nix-tag-images.s3.amazonaws.com/530_thumb.jpg",
+  },
+]);
 const searchedItemsCount = 5;
 
 const searchText = ref("");
 
 const isDropdownActive = computed(() => {
-  if (searchedItems.value.length > 0) {
+  if (searchedItems.value.length > 0 && searchText.value !== "") {
     return true;
   }
 
   return false;
 });
 
+let timer = ref(undefined);
+
 watch(searchText, (textValue) => {
-  loadSearchedItems(textValue);
+  clearTimeout(timer);
+  const timeoutBeforeSearch = 300;
+
+  timer = setTimeout(() => {
+    loadSearchedItems(textValue);
+  }, timeoutBeforeSearch);
 });
 
 const loadSearchedItems = (name) => {
@@ -62,7 +78,7 @@ const loadSearchedItems = (name) => {
     return;
   }
 
-  load(async () => {
+  loadApi(async () => {
     const response = await api.nutritionix.search(name);
 
     const valuesArray = Object.values(response.data.common);
@@ -81,6 +97,10 @@ const loadSearchedItems = (name) => {
       });
     }
   });
+};
+
+const onImageLoad = () => {
+  console.log("loaded");
 };
 </script>
 
@@ -143,5 +163,31 @@ const loadSearchedItems = (name) => {
 
 .search-wrapper {
   display: flex;
+}
+
+.item {
+  cursor: pointer;
+  display: flex;
+
+  :first-child {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: rgb(238, 238, 238);
+  }
+
+  &__image {
+    height: 50px;
+    img {
+      height: 50px;
+    }
+  }
+
+  &__name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 </style>
