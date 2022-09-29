@@ -20,7 +20,7 @@
             class="dropdown__item item"
             v-for="item in searchedItems"
             :key="item.foodName"
-            @click="onItemClick(item.foodName)"
+            @click="onItemClick(item.foodName, item.photoUrl)"
           >
             <div class="item__image">
               <img :src="item.photoUrl" alt="image" />
@@ -104,9 +104,10 @@ const loadSearchedItems = (name) => {
   });
 };
 
-const onItemClick = (foodName) => {
+const onItemClick = (foodName, photoUrl) => {
   searchedItems.value = [];
-  emit("foodChosen", foodName);
+  searchText.value = "";
+  emit("foodChosen", foodName, photoUrl);
 };
 </script>
 
