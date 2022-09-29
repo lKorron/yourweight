@@ -42,7 +42,7 @@
   <content-panel>
     <template #header>Что я сегодня съел?</template>
     <template #default>
-      <eated-today></eated-today>
+      <food-search></food-search>
     </template>
   </content-panel>
 </template>
@@ -54,7 +54,7 @@ import AsyncPopup from "./components/AsyncPopup.vue";
 import ContentPanel from "./components/ContentPanel.vue";
 import CurrentState from "./components/CurrentState.vue";
 import CalculatedCalories from "./components/CalculatedCalories.vue";
-import EatedToday from "./components/EatedToday.vue";
+import FoodSearch from "./components/FoodSearch.vue";
 
 import { ref, onMounted, reactive, computed } from "vue";
 
