@@ -39,7 +39,7 @@
 import { inject, ref, watch, computed, defineEmits } from "vue";
 
 const emit = defineEmits({
-  foodName: (value) => {
+  foodChosen: (value) => {
     return typeof value === "string";
   },
 });
@@ -105,8 +105,8 @@ const loadSearchedItems = (name) => {
 };
 
 const onItemClick = (foodName) => {
-  console.log(foodName);
-  emit("foodName", foodName);
+  searchedItems.value = [];
+  emit("foodChosen", foodName);
 };
 </script>
 

@@ -39,10 +39,10 @@
     ></template>
   </content-panel>
 
-  <content-panel>
+  <content-panel v-if="!isDataAvailable">
     <template #header>Что я сегодня съел?</template>
     <template #default>
-      <food-search></food-search>
+      <eated-today></eated-today>
     </template>
   </content-panel>
 </template>
@@ -54,7 +54,7 @@ import AsyncPopup from "./components/AsyncPopup.vue";
 import ContentPanel from "./components/ContentPanel.vue";
 import CurrentState from "./components/CurrentState.vue";
 import CalculatedCalories from "./components/CalculatedCalories.vue";
-import FoodSearch from "./components/FoodSearch.vue";
+import EatedToday from "./components/EatedToday.vue";
 
 import { ref, onMounted, reactive, computed } from "vue";
 
