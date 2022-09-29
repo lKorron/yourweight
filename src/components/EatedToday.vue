@@ -20,6 +20,7 @@
             class="dropdown__item item"
             v-for="item in searchedItems"
             :key="item.foodName"
+            @click="onItemClick(item.foodName)"
           >
             <div class="item__image">
               <img :src="item.photoUrl" alt="image" />
@@ -35,16 +36,19 @@
 </template>
 
 <script setup>
-import { ifStatement } from "@babel/types";
-import { onMounted, inject, ref, watch, computed } from "vue";
+import { inject, ref, watch, computed, defineEmits } from "vue";
+
+const emit = defineEmits({
+  foodName: (value) => {
+    return typeof value === "string";
+  },
+});
 
 const api = inject("api");
 const loadApi = inject("load");
 
 let searchedItems = ref([]);
 const searchedItemsCount = 5;
-
-const searchText = ref("");
 
 const isDropdownActive = computed(() => {
   if (searchedItems.value.length > 0 && searchText.value !== "") {
@@ -54,6 +58,7 @@ const isDropdownActive = computed(() => {
   return false;
 });
 
+const searchText = ref("");
 let timer = ref(undefined);
 
 watch(searchText, (textValue) => {
@@ -77,21 +82,31 @@ const loadSearchedItems = (name) => {
 
     const valuesArray = Object.values(response.data.common);
 
+    let itemsCount = searchedItemsCount;
+
     if (valuesArray.length <= 0) {
       return;
     }
 
+    if (valuesArray.length < searchedItemsCount) {
+      itemsCount = valuesArray.length;
+    }
+
     searchedItems.value = [];
-    for (let i = 0; i < searchedItemsCount; i++) {
+    for (let i = 0; i < itemsCount; i++) {
       const { food_name, photo } = valuesArray[i];
 
       searchedItems.value.push({
         foodName: food_name,
         photoUrl: photo.thumb,
-        loaded: false,
       });
     }
   });
+};
+
+const onItemClick = (foodName) => {
+  console.log(foodName);
+  emit("foodName", foodName);
 };
 </script>
 
