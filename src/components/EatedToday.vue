@@ -4,7 +4,7 @@
       <div class="search-field__input">
         <input
           type="text"
-          v-model="searchText"
+          v-model.trim="searchText"
           placeholder="Введите название еды"
         />
       </div>
@@ -22,9 +22,11 @@
             :key="item.foodName"
           >
             <div class="item__image">
-              <img @load="onImageLoad" :src="item.photoUrl" alt="image" />
+              <img :src="item.photoUrl" alt="image" />
             </div>
-            <div class="item__name">{{ item.foodName }}</div>
+            <div class="item__name">
+              {{ item.foodName }}
+            </div>
           </li>
         </ul>
       </div>
@@ -33,21 +35,13 @@
 </template>
 
 <script setup>
+import { ifStatement } from "@babel/types";
 import { onMounted, inject, ref, watch, computed } from "vue";
 
 const api = inject("api");
 const loadApi = inject("load");
 
-let searchedItems = ref([
-  {
-    foodName: "Еда1",
-    photoUrl: "https://nix-tag-images.s3.amazonaws.com/530_thumb.jpg",
-  },
-  {
-    foodName: "Еда2",
-    photoUrl: "https://nix-tag-images.s3.amazonaws.com/530_thumb.jpg",
-  },
-]);
+let searchedItems = ref([]);
 const searchedItemsCount = 5;
 
 const searchText = ref("");
@@ -94,13 +88,10 @@ const loadSearchedItems = (name) => {
       searchedItems.value.push({
         foodName: food_name,
         photoUrl: photo.thumb,
+        loaded: false,
       });
     }
   });
-};
-
-const onImageLoad = () => {
-  console.log("loaded");
 };
 </script>
 
@@ -178,6 +169,7 @@ const onImageLoad = () => {
   }
 
   &__image {
+    width: 100px;
     height: 50px;
     img {
       height: 50px;
