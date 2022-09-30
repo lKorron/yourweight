@@ -19,6 +19,12 @@
 
 <script setup>
 import { defineProps, computed, ref, toRefs } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+
+console.log(store.state.caloriesModule);
+
 const props = defineProps({
   height: Number,
   weight: Number,
@@ -39,7 +45,10 @@ const bmr = (weight) => {
     const result =
       (66.5 + 13.75 * weight + 5.003 * height.value - 6.775 * age.value) *
       coeff.value;
-    return Math.round(result);
+
+    const roundedResult = Math.round(result);
+    store.dispatch("caloriesModule/setCalories");
+    return roundedResult;
   }
 
   if (sex.value === "female") {

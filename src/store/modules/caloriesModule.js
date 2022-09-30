@@ -1,10 +1,11 @@
 const caloriesModule = {
-  state: () => ({
-    calories: 0,
-  }),
+  namespaced: true,
+  state: {
+    calories: 2,
+  },
   actions: {
     setCalories(context, value) {
-      context.commit("setCaloris", value);
+      context.commit("setCalories", value);
     },
   },
   mutations: {
@@ -19,3 +20,5 @@ const caloriesModule = {
     },
   },
 };
+
+export default caloriesModule;
