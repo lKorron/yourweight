@@ -44,8 +44,6 @@ const servingUnit = ref("порция");
 const calories = ref("-");
 const servingCount = ref(1);
 
-const caloriesToday = ref(0);
-
 const isPresentAppear = computed(() => {
   if (calories.value != "-") {
     return true;
@@ -65,10 +63,18 @@ const allCalories = computed(() => {
 
 const foodList = ref([]);
 
-const onSubmit = () => {
-  caloriesToday.value += allCalories.value;
+const caloriesToday = computed(() => {
+  let result = 0;
 
-  const foodListObject = {
+  foodList.value.forEach((item) => {
+    result += item.calories;
+  });
+
+  return result;
+});
+
+const onSubmit = () => {
+  const foodListItem = {
     servingCount: servingCount.value,
     servingUnit: servingUnit.value,
     imageUrl: imageUrl.value,
@@ -76,7 +82,13 @@ const onSubmit = () => {
     calories: allCalories.value,
   };
 
-  foodList.value.push(foodListObject);
+  foodList.value.forEach((item) => {
+    if (item.name === foodListItem.name) {
+      // do logic
+    }
+  });
+
+  foodList.value.push(foodListItem);
 };
 
 const onDeleteItem = (name) => {
