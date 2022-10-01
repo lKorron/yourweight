@@ -19,8 +19,8 @@ defineRule("number", (value) => {
     return "Введите числовое значение";
   }
 
-  if (parsedValue < 0) {
-    return "Значение не должно быть отрицательным";
+  if (parsedValue <= 0) {
+    return "Значение не должно быть больше нуля";
   }
 
   return true;

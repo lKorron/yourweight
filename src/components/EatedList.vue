@@ -1,31 +1,44 @@
 <template>
-  <ul class="eated-list">
+  <ul v-if="isListActive" class="eated-list">
     <li
       v-for="foodItem in foodList"
       :key="foodItem.name"
       class="eated-list__item item"
     >
-      <div class="item__number">{{ foodItem.servingCount }}</div>
+      <div class="item__number">
+        {{ foodItem.servingCount }} {{ foodItem.servingUnit }}
+      </div>
+
       <div class="item__image">
         <img :src="foodItem.imageUrl" alt="food image" />
       </div>
       <div class="item__name">{{ foodItem.name }}</div>
       <div class="item__calories">{{ foodItem.calories }} Ккал</div>
-      <button @click="deleteItem(foodItem.name)" class="item__delete__button">
-        x
-      </button>
+      <div class="item__delete">
+        <button @click="deleteItem(foodItem.name)">x</button>
+      </div>
     </li>
   </ul>
 </template>
 
 <script setup>
-import { defineProps, defineEmits, toRefs } from "vue";
+import { defineProps, defineEmits, toRefs, computed } from "vue";
 
 const props = defineProps({
   foodList: {
     type: Array,
     required: true,
   },
+});
+
+const isListActive = computed(() => {
+  if (!foodList) {
+    return false;
+  }
+  if (foodList.value.length <= 0) {
+    return false;
+  }
+  return true;
 });
 
 const emit = defineEmits({
@@ -49,12 +62,16 @@ const deleteItem = (name) => {
   margin: 0 auto;
 
   &__item {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     align-items: center;
 
     &:not(:last-child) {
       border-bottom: 1px solid #000;
+    }
+
+    :first-child {
+      padding-left: 5px;
     }
   }
 }

@@ -75,20 +75,26 @@ const caloriesToday = computed(() => {
 
 const onSubmit = () => {
   const foodListItem = {
-    servingCount: servingCount.value,
+    servingCount: parseInt(servingCount.value),
     servingUnit: servingUnit.value,
     imageUrl: imageUrl.value,
     name: name.value,
     calories: allCalories.value,
   };
 
+  let hasItem = false;
+
   foodList.value.forEach((item) => {
     if (item.name === foodListItem.name) {
-      // do logic
+      item.servingCount += foodListItem.servingCount;
+      item.calories += foodListItem.calories;
+      hasItem = true;
     }
   });
 
-  foodList.value.push(foodListItem);
+  if (!hasItem) {
+    foodList.value.push(foodListItem);
+  }
 };
 
 const onDeleteItem = (name) => {
