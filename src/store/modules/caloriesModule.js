@@ -1,8 +1,8 @@
 const caloriesModule = {
   namespaced: true,
   state: {
-    commonCalories: 0,
-    targetCalories: 0,
+    commonCalories: 2086,
+    targetCalories: 2169,
   },
   getters: {
     getCommonCalories(state) {

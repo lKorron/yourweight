@@ -22,7 +22,7 @@
       </div>
     </div>
   </div>
-  <today-progress></today-progress>
+  <today-progress :todayCalories="400"></today-progress>
 </template>
 
 <script setup>
@@ -81,7 +81,7 @@ const onFoodChosen = (foodName, photoUrl) => {
 
   &__image {
     margin: 0 auto;
-    height: 150px;
+    min-height: 100px;
     width: 150px;
     img {
       width: 150px;

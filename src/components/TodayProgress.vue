@@ -1,18 +1,42 @@
 <template>
   <div class="today-progress">
-    {{ commonCalories }}/{{ targetCalories }}
-    <div class="progress-container">
-      <ProgressBar :bgcolor="'#6a1b9a'" :completed="30"></ProgressBar>
-      <ProgressBar :bgcolor="'#6a1b9a'" :completed="100"></ProgressBar>
+    <h3 class="today-progress__header">Прогресс поддержания веса</h3>
+    <div class="today-progress__values">
+      {{ todayCalories }}/{{ commonCalories }}
     </div>
+    <ProgressBar
+      class="progress-bar"
+      :bgcolor="'red'"
+      :completed="commonPercentage"
+    ></ProgressBar>
+    <h3 class="today-progress__header">Прогресс изменения веса</h3>
+    <div class="today-progress__values">
+      {{ todayCalories }}/{{ targetCalories }}
+    </div>
+    <ProgressBar
+      class="progress-bar"
+      :bgcolor="'darkcyan'"
+      :completed="targetPercentage"
+    ></ProgressBar>
   </div>
 </template>
 
 <script setup>
-import { ref, defineProps, computed } from "vue";
+import { ref, defineProps, computed, toRefs } from "vue";
 import { useStore } from "vuex";
 
 import ProgressBar from "./ProgressBar.vue";
+
+const props = defineProps({
+  todayCalories: {
+    type: Number,
+    required: true,
+  },
+});
+
+const { todayCalories } = toRefs(props);
+
+console.log(todayCalories.value);
 
 const store = useStore();
 
@@ -22,14 +46,28 @@ const commonCalories = computed(
 const targetCalories = computed(
   () => store.getters["caloriesModule/getTargetCalories"]
 );
+
+const commonPercentage = computed(() =>
+  Math.round((todayCalories.value / commonCalories.value) * 100)
+);
+
+const targetPercentage = computed(() =>
+  Math.round((todayCalories.value / targetCalories.value) * 100)
+);
 </script>
 
 <style lang="scss">
-.progress-container {
-  margin: 0 auto;
-  width: 400px;
+.today-progress {
+  .progress-bar {
+    margin: 0 auto;
+    width: 400px;
 
-  :not(:last-child) {
+    &:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__values {
     margin-bottom: 10px;
   }
 }
