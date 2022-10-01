@@ -18,12 +18,8 @@
 </template>
 
 <script setup>
-import { defineProps, computed, ref, toRefs } from "vue";
+import { defineProps, computed, ref, toRefs, onMounted } from "vue";
 import { useStore } from "vuex";
-
-const store = useStore();
-
-console.log(store.state.caloriesModule);
 
 const props = defineProps({
   height: Number,
@@ -36,29 +32,40 @@ const props = defineProps({
 
 const { height, weight, age, targetWeight, coeff, sex } = toRefs(props);
 
+onMounted(() => {
+  loadWeightToStorage("setCommonCalories", bmr(weight.value));
+  loadWeightToStorage("setTargetCalories", bmr(targetWeight.value));
+});
+
 const bmr = (weight) => {
   if (Object.values(props).includes(null)) {
     return "-";
   }
 
   if (sex.value === "male") {
-    const result =
-      (66.5 + 13.75 * weight + 5.003 * height.value - 6.775 * age.value) *
-      coeff.value;
-
-    const roundedResult = Math.round(result);
-    store.dispatch("caloriesModule/setCalories");
-    return roundedResult;
+    return bmrByCoeff(weight, 66.4, 13.75, 5.003, 6.775);
   }
 
   if (sex.value === "female") {
-    const result =
-      (655.1 + 9.563 * weight + 1.85 * height.value - 4.676 * age.value) *
-      coeff.value;
-    return Math.round(result);
+    return bmrByCoeff(weight, 655.1, 9.563, 1.85, 4.676);
   }
 
   throw new Error("sex value is undefind");
+};
+
+const store = useStore();
+
+const bmrByCoeff = (weight, a, b, c, d) => {
+  const result =
+    (a + b * weight + c * height.value - d * age.value) * coeff.value;
+  const roundedResult = Math.round(result);
+  return roundedResult;
+};
+
+const loadWeightToStorage = (action, weight) => {
+  if (typeof weight === "number") {
+    store.dispatch(`caloriesModule/${action}`, weight);
+  }
 };
 </script>
 

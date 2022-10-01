@@ -3,9 +3,14 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref, defineProps, computed } from "vue";
+import { useStore } from "vuex";
 
-const eatedCalories = ref(0);
+const store = useStore();
+
+const eatedCalories = computed(
+  () => store.getters["caloriesModule/getCommonCalories"]
+);
 </script>
 
 <style lang="scss"></style>

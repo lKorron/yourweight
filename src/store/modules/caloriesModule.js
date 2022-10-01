@@ -1,22 +1,31 @@
 const caloriesModule = {
   namespaced: true,
   state: {
-    calories: 2,
+    commonCalories: 0,
+    targetCalories: 0,
   },
-  actions: {
-    setCalories(context, value) {
-      context.commit("setCalories", value);
+  getters: {
+    getCommonCalories(state) {
+      return state.commonCalories;
+    },
+    getTargetCalories(state) {
+      return state.targetCalories;
     },
   },
   mutations: {
-    setCalories(state, value) {
-      // `state` is the local module state
-      state.calories = value;
+    setCommonCalories(state, value) {
+      state.commonCalories = value;
+    },
+    setTargetCalories(state, value) {
+      state.targetCalories = value;
     },
   },
-  getters: {
-    getCalories(state) {
-      return state.calories;
+  actions: {
+    setCommonCalories(context, value) {
+      context.commit("setCommonCalories", value);
+    },
+    setTargetCalories(context, value) {
+      context.commit("setTargetCalories", value);
     },
   },
 };
