@@ -6,8 +6,8 @@
       <img :src="imageUrl" alt="food image" />
     </div>
     <div class="food-present__body">
-      <div @submit.prevent="onSubmit" class="food-present__add add">
-        <input
+      <Form @submit="onSubmit" class="food-present__add add">
+        <Field
           v-model.trim="servingCount"
           class="add__input"
           name="text"
@@ -19,10 +19,10 @@
         </div>
         <div class="add__calories">({{ allCalories }} ккал)</div>
         <button>+</button>
-      </div>
+      </Form>
     </div>
   </div>
-  <today-progress :todayCalories="400"></today-progress>
+  <today-progress :todayCalories="caloriesToday"></today-progress>
 </template>
 
 <script setup>
@@ -30,6 +30,7 @@ import FoodSearch from "./FoodSearch.vue";
 import TodayProgress from "./TodayProgress.vue";
 
 import { inject, ref, computed, watch } from "vue";
+import { Form, Field } from "vee-validate";
 
 const api = inject("api");
 const loadApi = inject("load");
@@ -40,6 +41,8 @@ const servingUnit = ref("порция");
 
 const calories = ref("-");
 const servingCount = ref(1);
+
+const caloriesToday = ref(0);
 
 const isPresentAppear = computed(() => {
   if (calories.value != "-") {
@@ -58,6 +61,10 @@ const allCalories = computed(() => {
   return result;
 });
 
+const onSubmit = () => {
+  caloriesToday.value += allCalories.value;
+};
+
 const onFoodChosen = (foodName, photoUrl) => {
   loadApi(() => {
     api.nutritionix.nutriens(foodName).then((response) => {
@@ -65,7 +72,7 @@ const onFoodChosen = (foodName, photoUrl) => {
 
       name.value = foodName;
       imageUrl.value = photoUrl;
-      calories.value = nf_calories;
+      calories.value = Math.round(nf_calories);
       servingUnit.value = serving_unit;
     });
   });

@@ -2,7 +2,7 @@
   <div class="today-progress">
     <h3 class="today-progress__header">Прогресс поддержания веса</h3>
     <div class="today-progress__values">
-      {{ todayCalories }}/{{ commonCalories }}
+      {{ todayCalories }}/{{ commonCalories }} ккал
     </div>
     <ProgressBar
       class="progress-bar"
@@ -11,7 +11,7 @@
     ></ProgressBar>
     <h3 class="today-progress__header">Прогресс изменения веса</h3>
     <div class="today-progress__values">
-      {{ todayCalories }}/{{ targetCalories }}
+      {{ todayCalories }}/{{ targetCalories }} ккал
     </div>
     <ProgressBar
       class="progress-bar"
@@ -47,13 +47,23 @@ const targetCalories = computed(
   () => store.getters["caloriesModule/getTargetCalories"]
 );
 
-const commonPercentage = computed(() =>
-  Math.round((todayCalories.value / commonCalories.value) * 100)
-);
+const commonPercentage = computed(() => {
+  let result = Math.round((todayCalories.value / commonCalories.value) * 100);
+  if (result > 100) {
+    result = 100;
+  }
 
-const targetPercentage = computed(() =>
-  Math.round((todayCalories.value / targetCalories.value) * 100)
-);
+  return result;
+});
+
+const targetPercentage = computed(() => {
+  let result = Math.round((todayCalories.value / targetCalories.value) * 100);
+  if (result > 100) {
+    result = 100;
+  }
+
+  return result;
+});
 </script>
 
 <style lang="scss">
