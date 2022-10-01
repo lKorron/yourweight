@@ -36,8 +36,6 @@ const props = defineProps({
 
 const { todayCalories } = toRefs(props);
 
-console.log(todayCalories.value);
-
 const store = useStore();
 
 const commonCalories = computed(
@@ -68,6 +66,7 @@ const targetPercentage = computed(() => {
 
 <style lang="scss">
 .today-progress {
+  margin-bottom: 30px;
   .progress-bar {
     margin: 0 auto;
     width: 400px;

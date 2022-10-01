@@ -23,11 +23,13 @@
     </div>
   </div>
   <today-progress :todayCalories="caloriesToday"></today-progress>
+  <eated-list :foodList="foodList" @delete-item="onDeleteItem"></eated-list>
 </template>
 
 <script setup>
 import FoodSearch from "./FoodSearch.vue";
 import TodayProgress from "./TodayProgress.vue";
+import EatedList from "./EatedList.vue";
 
 import { inject, ref, computed, watch } from "vue";
 import { Form, Field } from "vee-validate";
@@ -61,8 +63,24 @@ const allCalories = computed(() => {
   return result;
 });
 
+const foodList = ref([]);
+
 const onSubmit = () => {
   caloriesToday.value += allCalories.value;
+
+  const foodListObject = {
+    servingCount: servingCount.value,
+    servingUnit: servingUnit.value,
+    imageUrl: imageUrl.value,
+    name: name.value,
+    calories: allCalories.value,
+  };
+
+  foodList.value.push(foodListObject);
+};
+
+const onDeleteItem = (name) => {
+  foodList.value = foodList.value.filter((el) => el.name !== name);
 };
 
 const onFoodChosen = (foodName, photoUrl) => {
