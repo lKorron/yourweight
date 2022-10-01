@@ -39,7 +39,7 @@
     ></template>
   </content-panel>
 
-  <content-panel v-if="isDataAvailable">
+  <content-panel v-if="!isDataAvailable">
     <template #header>Что я сегодня съел?</template>
     <template #default>
       <eated-today></eated-today>
@@ -59,7 +59,7 @@ import EatedToday from "./components/EatedToday.vue";
 import { ref, onMounted, reactive, computed } from "vue";
 
 onMounted(() => {
-  openInputPopup();
+  //openInputPopup();
 });
 
 // Data

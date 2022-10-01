@@ -1,10 +1,18 @@
 <template>
-  <div class="today-progress">{{ commonCalories }}/{{ targetCalories }}</div>
+  <div class="today-progress">
+    {{ commonCalories }}/{{ targetCalories }}
+    <div class="progress-container">
+      <ProgressBar :bgcolor="'#6a1b9a'" :completed="30"></ProgressBar>
+      <ProgressBar :bgcolor="'#6a1b9a'" :completed="100"></ProgressBar>
+    </div>
+  </div>
 </template>
 
 <script setup>
 import { ref, defineProps, computed } from "vue";
 import { useStore } from "vuex";
+
+import ProgressBar from "./ProgressBar.vue";
 
 const store = useStore();
 
@@ -16,4 +24,13 @@ const targetCalories = computed(
 );
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.progress-container {
+  margin: 0 auto;
+  width: 400px;
+
+  :not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+</style>
