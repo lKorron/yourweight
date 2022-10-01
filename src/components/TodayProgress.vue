@@ -1,5 +1,5 @@
 <template>
-  <div class="today-progress">{{ eatedCalories }}</div>
+  <div class="today-progress">{{ commonCalories }}/{{ targetCalories }}</div>
 </template>
 
 <script setup>
@@ -8,8 +8,11 @@ import { useStore } from "vuex";
 
 const store = useStore();
 
-const eatedCalories = computed(
+const commonCalories = computed(
   () => store.getters["caloriesModule/getCommonCalories"]
+);
+const targetCalories = computed(
+  () => store.getters["caloriesModule/getTargetCalories"]
 );
 </script>
 
