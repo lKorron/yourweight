@@ -12,17 +12,40 @@
           neque consectetur blanditiis.</slot
         >
       </div>
+      <button v-if="isBackButton" @click="onClick" class="back-button">
+        <img src="../assets/back.png" alt="назад" />
+      </button>
     </div>
   </transition>
 </template>
 
-<script setup></script>
+<script setup>
+import { defineProps, defineEmits, toRef } from "vue";
+
+const props = defineProps({
+  backButton: {
+    type: Boolean,
+    reqruired: false,
+  },
+});
+
+const emit = defineEmits({
+  "back-button-click": null,
+});
+
+const onClick = () => {
+  emit("back-button-click");
+};
+
+const isBackButton = toRef(props, "backButton");
+</script>
 
 <style lang="scss">
 @import "../styles/mixins";
 
 .content-panel {
   @include setPlane(800px);
+  position: relative;
   margin-bottom: 30px;
 
   &__header {
@@ -31,6 +54,20 @@
 
   &__content {
     margin-bottom: 40px;
+  }
+
+  .back-button {
+    @include sizeImgContainer($size: 28px);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    transition: transform 0.25s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }
 
