@@ -3,6 +3,12 @@
   <router-view></router-view>
 </template>
 
+<script setup>
+import router from "./router";
+
+router.replace({ name: "input" });
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

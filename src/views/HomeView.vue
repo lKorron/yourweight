@@ -1,20 +1,5 @@
 <template>
-  <async-popup ref="inputPopup" ignoreKeys>
-    <template #header> Данные пользователя </template>
-    <template #default>
-      <user-input @submit="handleSubmit"></user-input
-    ></template>
-    <template #button> <div></div></template>
-  </async-popup>
-  <async-popup ref="purposePopup" ignoreKeys>
-    <template #header> Желаемый вес </template>
-    <template #default>
-      <purpose-input @submit="handleSubmit"></purpose-input
-    ></template>
-    <template #button> <div></div></template>
-  </async-popup>
-
-  <content-panel v-if="isDataAvailable">
+  <content-panel>
     <template #header>Общий прогресс</template>
     <template #default
       ><current-state
@@ -24,7 +9,7 @@
     ></template>
   </content-panel>
 
-  <content-panel v-if="isDataAvailable">
+  <content-panel>
     <template #header>Расчет калорий</template>
     <template #default
       ><calculated-calories
@@ -38,7 +23,7 @@
     ></template>
   </content-panel>
 
-  <content-panel v-if="isDataAvailable">
+  <content-panel>
     <template #header>Что я сегодня съел?</template>
     <template #default>
       <router-link class="plus-link" to="eatedToday">
@@ -58,64 +43,11 @@ import CalculatedCalories from "../components/CalculatedCalories.vue";
 import EatedToday from "../components/EatedToday.vue";
 
 import { ref, onMounted, reactive, computed } from "vue";
+
 import { useStore } from "vuex";
 
-onMounted(() => {
-  openInputPopup();
-});
-
-// Data
-let userData = reactive({
-  height: null,
-  weight: null,
-  sex: null,
-  targetWeight: null,
-});
-
-const isDataAvailable = computed(() => {
-  let result = true;
-
-  Object.entries(userData).forEach(([, value]) => {
-    if (value === null) {
-      result = false;
-    }
-  });
-
-  return result;
-});
-
-// Popups
-const inputPopup = ref(null);
-const purposePopup = ref(null);
-
-const openInputPopup = async () => {
-  const popupResult = await inputPopup.value.open();
-
-  if (popupResult) {
-    openPurposePopup();
-  }
-};
-
-const openPurposePopup = async () => {
-  const popupResult = await purposePopup.value.open();
-
-  if (popupResult) {
-    //code
-  }
-};
-
 const store = useStore();
-
-const handleSubmit = (userObject) => {
-  inputPopup.value.close();
-  purposePopup.value.close();
-
-  Object.entries(userObject).forEach(([key, value]) => {
-    userData[key] = value;
-  });
-
-  store.dispatch(`userDataModule/setUserData`, userObject);
-};
+const userData = store.getters["userDataModule/getUserData"];
 </script>
 
 <style lang="scss" scoped>
