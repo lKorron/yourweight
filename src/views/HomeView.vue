@@ -37,11 +37,14 @@
       ></calculated-calories
     ></template>
   </content-panel>
-  <content-panel v-if="isDataAvailable">
-    <template #header
-      ><router-link to="eatedToday">Что я сегодня съел?</router-link></template
-    >
-    <template #default></template>
+
+  <content-panel v-if="!isDataAvailable">
+    <template #header>Что я сегодня съел?</template>
+    <template #default>
+      <router-link class="plus-link" to="eatedToday">
+        <img src="../assets/plus.png" alt="plus"
+      /></router-link>
+    </template>
   </content-panel>
 </template>
 
@@ -57,7 +60,7 @@ import EatedToday from "../components/EatedToday.vue";
 import { ref, onMounted, reactive, computed } from "vue";
 
 onMounted(() => {
-  openInputPopup();
+  //openInputPopup();
 });
 
 // Data
@@ -112,4 +115,17 @@ const handleSubmit = (userObject) => {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+@import "../styles/mixins";
+.plus-link {
+  display: block;
+  @include sizeImgContainer($size: 80px);
+  margin: 0 auto;
+  transition: transform 0.25s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+</style>
