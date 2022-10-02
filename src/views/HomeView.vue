@@ -58,6 +58,7 @@ import CalculatedCalories from "../components/CalculatedCalories.vue";
 import EatedToday from "../components/EatedToday.vue";
 
 import { ref, onMounted, reactive, computed } from "vue";
+import { useStore } from "vuex";
 
 onMounted(() => {
   openInputPopup();
@@ -103,6 +104,8 @@ const openPurposePopup = async () => {
   }
 };
 
+const store = useStore();
+
 const handleSubmit = (userObject) => {
   inputPopup.value.close();
   purposePopup.value.close();
@@ -111,7 +114,7 @@ const handleSubmit = (userObject) => {
     userData[key] = value;
   });
 
-  console.log(userData);
+  store.dispatch(`userDataModule/setUserData`, userObject);
 };
 </script>
 

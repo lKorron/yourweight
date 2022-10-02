@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import caloriesModule from "./modules/caloriesModule";
+import userDataModule from "./modules/userDataModule";
 
 export default createStore({
   state: {},
@@ -8,5 +9,6 @@ export default createStore({
   actions: {},
   modules: {
     caloriesModule,
+    userDataModule,
   },
 });
