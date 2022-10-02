@@ -1,5 +1,5 @@
 <template>
-  <content-panel backButton @back-button-click="onBackButtonClick">
+  <content-panel back-button>
     <template #header>Что я сегодня съел?</template>
     <template #default>
       <eated-today></eated-today>
@@ -11,10 +11,6 @@
 import ContentPanel from "../components/ContentPanel.vue";
 import EatedToday from "../components/EatedToday.vue";
 import router from "@/router";
-
-const onBackButtonClick = () => {
-  router.push({ name: "home" });
-};
 </script>
 
 <style></style>

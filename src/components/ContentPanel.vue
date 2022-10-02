@@ -21,9 +21,14 @@
 
 <script setup>
 import { defineProps, defineEmits, toRef } from "vue";
+import router from "@/router";
 
 const props = defineProps({
   backButton: {
+    type: Boolean,
+    reqruired: false,
+  },
+  customRoute: {
     type: Boolean,
     reqruired: false,
   },
@@ -34,10 +39,16 @@ const emit = defineEmits({
 });
 
 const onClick = () => {
-  emit("back-button-click");
+  if (isCustomRoute.value) {
+    emit("back-button-click");
+    return;
+  }
+
+  router.push({ name: "home" });
 };
 
 const isBackButton = toRef(props, "backButton");
+const isCustomRoute = toRef(props, "customRoute");
 </script>
 
 <style lang="scss">
