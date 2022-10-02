@@ -34,9 +34,6 @@
 </template>
 
 <script setup>
-import UserInput from "../components/UserInput.vue";
-import PurposeInput from "../components/PurposeInput.vue";
-import AsyncPopup from "../components/AsyncPopup.vue";
 import ContentPanel from "../components/ContentPanel.vue";
 import CurrentState from "../components/CurrentState.vue";
 import CalculatedCalories from "../components/CalculatedCalories.vue";

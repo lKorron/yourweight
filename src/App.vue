@@ -5,8 +5,13 @@
 
 <script setup>
 import router from "./router";
+import { useStore } from "vuex";
 
 router.replace({ name: "input" });
+
+const store = useStore();
+
+store.dispatch(`userDataModule/initStorage`);
 </script>
 
 <style lang="scss">
