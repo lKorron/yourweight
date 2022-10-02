@@ -2,12 +2,12 @@ const userDataModule = {
   namespaced: true,
   state: {
     userData: {
-      height: 0,
-      weight: 0,
-      age: 0,
-      coeff: 0,
-      sex: "",
-      targetWeight: 0,
+      height: null,
+      weight: null,
+      age: null,
+      coeff: null,
+      sex: null,
+      targetWeight: null,
     },
   },
   getters: {
@@ -24,7 +24,11 @@ const userDataModule = {
     },
 
     initStorage(state) {
-      state.userData = JSON.parse(localStorage.getItem("userData"));
+      const storedUserData = JSON.parse(localStorage.getItem("userData"));
+
+      if (storedUserData) {
+        state.userData = storedUserData;
+      }
     },
   },
   actions: {

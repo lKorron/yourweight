@@ -7,11 +7,16 @@
 import router from "./router";
 import { useStore } from "vuex";
 
-router.replace({ name: "input" });
-
 const store = useStore();
 
-store.dispatch(`userDataModule/initStorage`);
+store.dispatch("userDataModule/initStorage");
+const userData = store.getters["userDataModule/getUserData"];
+
+Object.entries(userData).forEach(([, value]) => {
+  if (value === null) {
+    router.replace({ name: "input" });
+  }
+});
 </script>
 
 <style lang="scss">

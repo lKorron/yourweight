@@ -20,7 +20,7 @@ defineRule("number", (value) => {
   }
 
   if (parsedValue <= 0) {
-    return "Значение не должно быть больше нуля";
+    return "Значение должно быть положительным";
   }
 
   return true;

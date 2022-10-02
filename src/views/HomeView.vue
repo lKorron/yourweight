@@ -39,8 +39,6 @@ import CurrentState from "../components/CurrentState.vue";
 import CalculatedCalories from "../components/CalculatedCalories.vue";
 import EatedToday from "../components/EatedToday.vue";
 
-import { ref, onMounted, reactive, computed } from "vue";
-
 import { useStore } from "vuex";
 
 const store = useStore();
