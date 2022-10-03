@@ -1,5 +1,5 @@
 <template>
-  <h1>yourweight</h1>
+  <h1 class="app-name">yourweight</h1>
   <router-view></router-view>
 </template>
 

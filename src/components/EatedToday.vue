@@ -44,6 +44,10 @@ const servingUnit = ref("порция");
 const calories = ref("-");
 const servingCount = ref(1);
 
+watch(servingUnit, () => {
+  servingCount.value = 1;
+});
+
 const isPresentAppear = computed(() => {
   if (calories.value != "-") {
     return true;
