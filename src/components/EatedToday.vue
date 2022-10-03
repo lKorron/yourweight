@@ -1,29 +1,35 @@
 <template>
-  <food-search @food-chosen="onFoodChosen"></food-search>
-  <div v-if="isPresentAppear" class="food-present">
-    <h3 class="food-present__food-name">{{ name }}</h3>
-    <div class="food-present__image">
-      <img :src="imageUrl" alt="food image" />
+  <div class="eated-today">
+    <food-search @food-chosen="onFoodChosen"></food-search>
+    <div v-if="isPresentAppear" class="food-present">
+      <h3 class="food-present__food-name">{{ name }}</h3>
+      <div class="food-present__image">
+        <img :src="imageUrl" alt="food image" />
+      </div>
+      <div class="food-present__body">
+        <Form @submit="onSubmit" class="food-present__add add">
+          <Field
+            v-model.trim="servingCount"
+            class="add__input"
+            name="text"
+            type="text"
+            rules="number"
+          />
+          <div class="add__serving-unit">
+            {{ servingUnit }}
+          </div>
+          <div class="add__calories">({{ allCalories }} ккал)</div>
+          <button>+</button>
+        </Form>
+      </div>
     </div>
-    <div class="food-present__body">
-      <Form @submit="onSubmit" class="food-present__add add">
-        <Field
-          v-model.trim="servingCount"
-          class="add__input"
-          name="text"
-          type="text"
-          rules="number"
-        />
-        <div class="add__serving-unit">
-          {{ servingUnit }}
-        </div>
-        <div class="add__calories">({{ allCalories }} ккал)</div>
-        <button>+</button>
-      </Form>
-    </div>
+    <today-progress :todayCalories="caloriesToday"></today-progress>
+    <div class="date">{{ currentDate }}</div>
+    <eated-list :foodList="foodList" @delete-item="onDeleteItem"></eated-list>
+    <button class="eated-today__button button" :disabled="isButtonDisabled">
+      Сохранить
+    </button>
   </div>
-  <today-progress :todayCalories="caloriesToday"></today-progress>
-  <eated-list :foodList="foodList" @delete-item="onDeleteItem"></eated-list>
 </template>
 
 <script setup>
@@ -33,6 +39,7 @@ import EatedList from "./EatedList.vue";
 
 import { inject, ref, computed, watch } from "vue";
 import { Form, Field } from "vee-validate";
+import moment from "moment";
 
 const api = inject("api");
 const loadApi = inject("load");
@@ -65,6 +72,12 @@ const allCalories = computed(() => {
   return result;
 });
 
+const currentDate = computed(() => {
+  var date = moment();
+
+  return date.format("DD/MM/YYYY");
+});
+
 const foodList = ref([]);
 
 const caloriesToday = computed(() => {
@@ -75,6 +88,13 @@ const caloriesToday = computed(() => {
   });
 
   return result;
+});
+
+const isButtonDisabled = computed(() => {
+  if (caloriesToday.value > 0) {
+    return false;
+  }
+  return true;
 });
 
 const onSubmit = () => {
@@ -120,6 +140,12 @@ const onFoodChosen = (foodName, photoUrl) => {
 </script>
 
 <style lang="scss" scoped>
+.eated-today {
+  &__button {
+    margin-top: 20px;
+  }
+}
+
 .food-present {
   &__body {
     display: flex;

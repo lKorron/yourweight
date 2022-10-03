@@ -36,6 +36,34 @@ body {
   background-size: $bg-size;
 }
 
+.button {
+  background-color: rgb(82, 176, 249);
+  border: none;
+  padding: 10px;
+  color: white;
+  transition: transform 0.25s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    filter: contrast(0.7);
+  }
+
+  &[disabled] {
+    background-color: gray;
+
+    &:hover {
+      transform: none;
+    }
+
+    &:active {
+      filter: none;
+    }
+  }
+}
+
 nav {
   padding: 30px;
 
