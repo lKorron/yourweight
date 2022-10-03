@@ -26,7 +26,11 @@
     <today-progress :todayCalories="caloriesToday"></today-progress>
     <div class="date">{{ currentDate }}</div>
     <eated-list :foodList="foodList" @delete-item="onDeleteItem"></eated-list>
-    <button class="eated-today__button button" :disabled="isButtonDisabled">
+    <button
+      @click="onSave"
+      :disabled="isButtonDisabled"
+      class="eated-today__button button"
+    >
       Сохранить
     </button>
   </div>
@@ -40,6 +44,9 @@ import EatedList from "./EatedList.vue";
 import { inject, ref, computed, watch } from "vue";
 import { Form, Field } from "vee-validate";
 import moment from "moment";
+import { useStore } from "vuex";
+
+const store = useStore();
 
 const api = inject("api");
 const loadApi = inject("load");
@@ -96,6 +103,10 @@ const isButtonDisabled = computed(() => {
   }
   return true;
 });
+
+const onSave = () => {
+  store.dispatch("periodDataModule/setDailyData", ["дата", "значение калорий"]);
+};
 
 const onSubmit = () => {
   const foodListItem = {

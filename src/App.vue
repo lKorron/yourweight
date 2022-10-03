@@ -53,6 +53,7 @@ body {
 
   &[disabled] {
     background-color: gray;
+    cursor: auto;
 
     &:hover {
       transform: none;

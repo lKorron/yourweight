@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import caloriesModule from "./modules/caloriesModule";
 import userDataModule from "./modules/userDataModule";
+import periodDataModule from "./modules/periodDataModule";
 
 export default createStore({
   state: {},
@@ -10,5 +11,6 @@ export default createStore({
   modules: {
     caloriesModule,
     userDataModule,
+    periodDataModule,
   },
 });
