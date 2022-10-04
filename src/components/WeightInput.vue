@@ -5,14 +5,13 @@
     </div>
     <Form @submit="onSubmit" class="weight-input__form form" v-slot="{ meta }">
       <Field
-        v-model="inputedWeight"
         class="form__input"
-        name="text"
+        name="weight"
         type="text"
         rules="number"
         placeholder="Введите новый вес"
       ></Field>
-      <ErrorMessage name="text" v-slot="{ message }">
+      <ErrorMessage name="weight" v-slot="{ message }">
         <div class="error-message">{{ message }}</div>
       </ErrorMessage>
       <button class="button" :disabled="!meta.valid">Сохранить</button>
@@ -27,9 +26,10 @@ import { useStore } from "vuex";
 
 const store = useStore();
 
-const inputedWeight = ref("");
-const onSubmit = () => {
-  inputedWeight.value = "";
+const onSubmit = (values, { resetForm }) => {
+  const weight = parseInt(values.weight);
+  console.log(weight);
+  resetForm();
 };
 </script>
 
