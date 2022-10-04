@@ -55,7 +55,7 @@ const isCustomRoute = toRef(props, "customRoute");
 @import "../styles/mixins";
 
 .content-panel {
-  @include setPlane(800px);
+  @include setPlane();
   position: relative;
   margin-bottom: 30px;
 

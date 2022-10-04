@@ -82,6 +82,9 @@ const loadWeightToStorage = (action, weight) => {
   }
 
   .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &__value {
       font-weight: bold;
       margin-top: 10px;

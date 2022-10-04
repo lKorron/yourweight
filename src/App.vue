@@ -1,6 +1,8 @@
 <template>
-  <h1 class="app-name">yourweight</h1>
-  <router-view></router-view>
+  <div class="wrapper">
+    <h1 class="app-name">yourweight</h1>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script setup>
@@ -26,6 +28,16 @@ Object.entries(userData).forEach(([, value]) => {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.wrapper {
+  margin-right: auto; /* 1 */
+  margin-left: auto; /* 1 */
+
+  max-width: 960px; /* 2 */
+
+  padding-right: 10px; /* 3 */
+  padding-left: 10px; /* 3 */
 }
 
 body {

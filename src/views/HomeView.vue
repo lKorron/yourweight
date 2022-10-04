@@ -26,14 +26,24 @@
     ></template>
   </content-panel>
 
-  <content-panel>
-    <template #header>Что я сегодня съел?</template>
-    <template #default>
-      <router-link class="plus-link" to="eatedToday">
-        <img src="../assets/plus.png" alt="plus"
-      /></router-link>
-    </template>
-  </content-panel>
+  <div class="double-group">
+    <content-panel>
+      <template #header>Что я сегодня съел?</template>
+      <template #default>
+        <router-link class="image-link" to="eatedToday">
+          <img src="../assets/plus.png" alt="plus"
+        /></router-link>
+      </template>
+    </content-panel>
+    <content-panel>
+      <template #header>Прогресс по датам</template>
+      <template #default>
+        <router-link class="image-link" to="period">
+          <img src="../assets/calendar.png" alt="plus"
+        /></router-link>
+      </template>
+    </content-panel>
+  </div>
 </template>
 
 <script setup>
@@ -50,7 +60,17 @@ const userData = store.getters["userDataModule/getUserData"];
 
 <style lang="scss" scoped>
 @import "../styles/mixins";
-.plus-link {
+
+.double-group {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  .content-panel {
+    width: 100%;
+  }
+}
+
+.image-link {
   display: block;
   @include sizeImgContainer($size: 80px);
   margin: 0 auto;
