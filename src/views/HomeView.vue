@@ -1,12 +1,15 @@
 <template>
-  <content-panel>
+  <content-panel class="main-progress">
     <template #header>Общий прогресс</template>
     <template #default
       ><current-state
         :weight="userData.weight"
         :targetWeight="userData.targetWeight"
-      ></current-state
-    ></template>
+      ></current-state>
+      <router-link to="weight" class="main-progress__link button"
+        ><img src="../assets/weight-scale.png" alt="weight-scale"
+      /></router-link>
+    </template>
   </content-panel>
 
   <content-panel>
@@ -56,6 +59,20 @@ const userData = store.getters["userDataModule/getUserData"];
 
   &:hover {
     transform: scale(1.1);
+  }
+}
+
+.main-progress {
+  position: relative;
+
+  &__link {
+    display: block;
+    @include sizeImgContainer($size: 35px);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
   }
 }
 </style>

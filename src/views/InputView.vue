@@ -44,7 +44,6 @@ const openPurposePopup = async () => {
   const popupResult = await purposePopup.value.open();
 
   if (popupResult) {
-    //code
     router.push({ name: "home" });
   }
 };

@@ -26,6 +26,11 @@ const routes = [
     name: "eatedToday",
     component: () => import("../views/EatedTodayView.vue"),
   },
+  {
+    path: "/weight",
+    name: "weight",
+    component: () => import("../views/WeightView.vue"),
+  },
 ];
 
 const router = createRouter({
