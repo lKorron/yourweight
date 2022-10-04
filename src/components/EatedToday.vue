@@ -105,7 +105,10 @@ const isButtonDisabled = computed(() => {
 });
 
 const onSave = () => {
-  store.dispatch("periodDataModule/setDailyData", ["дата", "значение калорий"]);
+  store.dispatch("periodDataModule/setDailyData", [
+    currentDate.value,
+    foodList.value,
+  ]);
 };
 
 const onSubmit = () => {
