@@ -28,7 +28,10 @@ const store = useStore();
 
 const onSubmit = (values, { resetForm }) => {
   const weight = parseInt(values.weight);
-  console.log(weight);
+
+  store.dispatch("userDataModule/setWeight", weight);
+
+  document.activeElement.blur();
   resetForm();
 };
 </script>
