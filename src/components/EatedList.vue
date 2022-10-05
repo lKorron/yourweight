@@ -6,15 +6,18 @@
       class="eated-list__item item"
     >
       <div class="item__number">
-        {{ foodItem.servingCount }} {{ foodItem.servingUnit }}
+        {{ foodItem.servingCount }}
+        <span v-if="!preview">{{ foodItem.servingUnit }}</span>
       </div>
 
       <div class="item__image">
         <img :src="foodItem.imageUrl" alt="food image" />
       </div>
       <div class="item__name">{{ foodItem.name }}</div>
-      <div class="item__calories">{{ foodItem.calories }} Ккал</div>
-      <div class="item__delete">
+      <div v-if="!preview" class="item__calories">
+        {{ foodItem.calories }} Ккал
+      </div>
+      <div v-if="!preview" class="item__delete">
         <button @click="deleteItem(foodItem.name)">x</button>
       </div>
     </li>
@@ -28,6 +31,10 @@ const props = defineProps({
   foodList: {
     type: Array,
     required: true,
+  },
+  preview: {
+    type: Boolean,
+    required: false,
   },
 });
 
@@ -45,7 +52,7 @@ const emit = defineEmits({
   "delete-item": (value) => typeof value === "string",
 });
 
-const { foodList } = toRefs(props);
+const { foodList, preview } = toRefs(props);
 
 const deleteItem = (name) => {
   emit("delete-item", name);

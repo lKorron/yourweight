@@ -7,6 +7,19 @@ const periodDataModule = {
     getDailyData(state, value) {
       return state.periodData.get(value);
     },
+    getDailyCalories: (state) => (value) => {
+      const foodList = state.periodData.get(value);
+
+      let summaryCalories = 0;
+      foodList.forEach(({ calories }) => {
+        summaryCalories += calories;
+      });
+
+      return summaryCalories;
+    },
+    getPeriod(state) {
+      return state.periodData;
+    },
   },
   mutations: {
     setDailyData(state, [key, value]) {
