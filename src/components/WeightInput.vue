@@ -23,6 +23,7 @@
 import { ref } from "vue";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import { useStore } from "vuex";
+import router from "@/router";
 
 const store = useStore();
 
@@ -31,8 +32,10 @@ const onSubmit = (values, { resetForm }) => {
 
   store.dispatch("userDataModule/setWeight", weight);
 
-  document.activeElement.blur();
-  resetForm();
+  //   document.activeElement.blur();
+  //   resetForm();
+
+  router.push({ name: "home" });
 };
 </script>
 
