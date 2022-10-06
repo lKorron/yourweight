@@ -28,12 +28,8 @@ const userDataModule = {
       localStorage.setItem("userData", JSON.stringify(state.userData));
     },
 
-    initStorage(state) {
-      const storedUserData = JSON.parse(localStorage.getItem("userData"));
-
-      if (storedUserData) {
-        state.userData = storedUserData;
-      }
+    setUserData(state, value) {
+      state.userData = value;
     },
   },
   actions: {
@@ -42,9 +38,6 @@ const userDataModule = {
     },
     setWeight(context, value) {
       context.commit("setWeight", value);
-    },
-    initStorage(context) {
-      context.commit("initStorage");
     },
   },
 };

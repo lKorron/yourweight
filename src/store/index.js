@@ -3,7 +3,15 @@ import caloriesModule from "./modules/caloriesModule";
 import userDataModule from "./modules/userDataModule";
 import periodDataModule from "./modules/periodDataModule";
 
-const initPlugin = (store) => {
+const initUser = (store) => {
+  let userData = JSON.parse(localStorage.getItem("userData"));
+
+  if (userData) {
+    store.dispatch("userDataModule/setUserData", userData);
+  }
+};
+
+const initPeriod = (store) => {
   let periodData = JSON.parse(localStorage.getItem("periodData"));
 
   if (periodData) {
@@ -15,7 +23,7 @@ const initPlugin = (store) => {
 
 export default createStore({
   state: {},
-  plugins: [initPlugin],
+  plugins: [initUser, initPeriod],
   getters: {},
   mutations: {},
   actions: {},

@@ -11,7 +11,6 @@ import { useStore } from "vuex";
 
 const store = useStore();
 
-store.dispatch("userDataModule/initStorage");
 const userData = store.getters["userDataModule/getUserData"];
 
 Object.entries(userData).forEach(([, value]) => {
