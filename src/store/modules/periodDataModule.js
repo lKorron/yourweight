@@ -25,7 +25,9 @@ const periodDataModule = {
     setDailyData(state, [key, value]) {
       state.periodData.set(key, value);
 
-      //localStorage.setItem("userData", JSON.stringify(state.userData));
+      const period = Object.fromEntries(state.periodData);
+
+      localStorage.setItem("periodData", JSON.stringify(period));
     },
   },
   actions: {
