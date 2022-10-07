@@ -1,8 +1,8 @@
 const caloriesModule = {
   namespaced: true,
   state: {
-    commonCalories: 2086,
-    targetCalories: 2169,
+    commonCalories: 0,
+    targetCalories: 0,
   },
   getters: {
     getCommonCalories(state) {
@@ -15,9 +15,11 @@ const caloriesModule = {
   mutations: {
     setCommonCalories(state, value) {
       state.commonCalories = value;
+      localStorage.setItem("commonCalories", value);
     },
     setTargetCalories(state, value) {
       state.targetCalories = value;
+      localStorage.setItem("targetCalories", value);
     },
   },
   actions: {

@@ -21,9 +21,19 @@ const initPeriod = (store) => {
   }
 };
 
+const initCalories = (store) => {
+  let commonCalories = JSON.parse(localStorage.getItem("commonCalories"));
+  let targetCalories = JSON.parse(localStorage.getItem("targetCalories"));
+
+  if (commonCalories && targetCalories) {
+    store.dispatch("caloriesModule/setCommonCalories", commonCalories);
+    store.dispatch("caloriesModule/setTargetCalories", targetCalories);
+  }
+};
+
 export default createStore({
   state: {},
-  plugins: [initUser, initPeriod],
+  plugins: [initUser, initPeriod, initCalories],
   getters: {},
   mutations: {},
   actions: {},
