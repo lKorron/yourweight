@@ -9,7 +9,13 @@
       <div class="card__eated">
         <eated-list :food-list="value" preview></eated-list>
       </div>
-      <div class="card__calories">{{ getCalories(date) }}</div>
+      <div
+        class="card__calories calories"
+        :class="[isPurposeComplete(date) ? 'calories_green' : 'calories_red']"
+      >
+        {{ getCalories(date) }}/{{ targetCalories }}
+      </div>
+
       <router-link
         class="image-link card__link"
         :to="{ name: 'date', params: { date: convertDate(date) } }"
@@ -27,11 +33,33 @@ import { useStore } from "vuex";
 
 const store = useStore();
 
+const commonCalories = computed(
+  () => store.getters["caloriesModule/getCommonCalories"]
+);
+
+const targetCalories = computed(
+  () => store.getters["caloriesModule/getTargetCalories"]
+);
+
 const periodDays = computed(() => store.getters["periodDataModule/getPeriod"]);
+
+const isPurposeComplete = (date) => {
+  const isGaining = commonCalories.value < targetCalories.value;
+  let isComplete = false;
+  if (isGaining) {
+    if (getCalories(date) >= targetCalories.value) {
+      isComplete = true;
+    }
+  } else {
+    if (getCalories(date) <= targetCalories.value) {
+      isComplete = true;
+    }
+  }
+
+  return isComplete;
+};
 const getCalories = (date) =>
   store.getters["periodDataModule/getDailyCalories"](date);
-
-onMounted(() => {});
 
 const convertDate = (dateString) => dateString.replaceAll("/", "-");
 
@@ -91,14 +119,27 @@ const foodList1 = [
     justify-content: space-around;
   }
 
-  &__calories {
-    border-top: 1px solid #000;
-  }
-
   &__link {
     position: absolute;
     top: 5px;
     right: 5px;
   }
+}
+
+.calories {
+  border-top: 1px solid #000;
+  border-bottom-left-radius: 9px;
+  border-bottom-right-radius: 9px;
+  font-weight: bold;
+}
+
+.calories_red {
+  color: white;
+  background-color: red;
+}
+
+.calories_green {
+  color: white;
+  background-color: green;
 }
 </style>
