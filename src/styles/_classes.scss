@@ -1,0 +1,13 @@
+@import "./mixins";
+
+.image-link {
+    display: block;
+    @include sizeImgContainer($size: 80px);
+    margin: 0 auto;
+    transition: transform 0.25s;
+    cursor: pointer;
+  
+    &:hover {
+      transform: scale(1.1);
+    }
+  }

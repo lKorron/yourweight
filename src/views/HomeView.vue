@@ -60,6 +60,7 @@ const userData = store.getters["userDataModule/getUserData"];
 
 <style lang="scss" scoped>
 @import "../styles/mixins";
+@import "../styles/classes";
 
 .double-group {
   display: grid;
@@ -67,18 +68,6 @@ const userData = store.getters["userDataModule/getUserData"];
   gap: 20px;
   .content-panel {
     width: 100%;
-  }
-}
-
-.image-link {
-  display: block;
-  @include sizeImgContainer($size: 80px);
-  margin: 0 auto;
-  transition: transform 0.25s;
-  cursor: pointer;
-
-  &:hover {
-    transform: scale(1.1);
   }
 }
 

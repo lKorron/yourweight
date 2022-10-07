@@ -10,6 +10,9 @@
         <eated-list :food-list="value" preview></eated-list>
       </div>
       <div class="card__calories">{{ getCalories(date) }}</div>
+      <router-link class="image-link card__link" to="eatedToday">
+        <img src="../assets/editing.png" alt="edit"
+      /></router-link>
     </div>
   </div>
 </template>
@@ -49,6 +52,13 @@ const foodList1 = [
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/classes";
+@import "../styles/mixins";
+
+.image-link {
+  @include sizeImgContainer(20px);
+}
+
 .period-progress {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -62,7 +72,7 @@ const foodList1 = [
   justify-content: space-between;
   border: 1px solid #000;
   border-radius: 10px;
-
+  position: relative;
   .eated-list {
     border: none;
     outline: 1px solid black;
@@ -70,10 +80,20 @@ const foodList1 = [
 
   &__data {
     border-bottom: 1px solid #000;
+    min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 
   &__calories {
     border-top: 1px solid #000;
+  }
+
+  &__link {
+    position: absolute;
+    top: 5px;
+    right: 5px;
   }
 }
 </style>
