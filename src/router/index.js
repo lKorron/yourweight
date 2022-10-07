@@ -41,6 +41,11 @@ const routes = [
     name: "weight",
     component: () => import("../views/WeightView.vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "notFound",
+    component: () => import("../views/NotFoundView.vue"),
+  },
 ];
 
 const router = createRouter({
