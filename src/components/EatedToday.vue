@@ -45,8 +45,11 @@ import { inject, ref, computed, watch } from "vue";
 import { Form, Field } from "vee-validate";
 import moment from "moment";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
+import userDataModule from "@/store/modules/userDataModule";
 
 const store = useStore();
+const route = useRoute();
 
 const api = inject("api");
 const loadApi = inject("load");
@@ -80,6 +83,9 @@ const allCalories = computed(() => {
 });
 
 const currentDate = computed(() => {
+  if (route.params?.date) {
+    return route.params.date.replaceAll("-", "/");
+  }
   var date = moment();
 
   return date.format("DD/MM/YYYY");

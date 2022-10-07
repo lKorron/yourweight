@@ -10,7 +10,10 @@
         <eated-list :food-list="value" preview></eated-list>
       </div>
       <div class="card__calories">{{ getCalories(date) }}</div>
-      <router-link class="image-link card__link" to="eatedToday">
+      <router-link
+        class="image-link card__link"
+        :to="{ name: 'date', params: { date: convertDate(date) } }"
+      >
         <img src="../assets/editing.png" alt="edit"
       /></router-link>
     </div>
@@ -29,6 +32,8 @@ const getCalories = (date) =>
   store.getters["periodDataModule/getDailyCalories"](date);
 
 onMounted(() => {});
+
+const convertDate = (dateString) => dateString.replaceAll("/", "-");
 
 const foodList1 = [
   {

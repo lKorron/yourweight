@@ -32,6 +32,11 @@ const routes = [
     component: () => import("../views/PeriodView.vue"),
   },
   {
+    path: "/period/:date",
+    name: "date",
+    component: () => import("../views/EatedTodayView.vue"),
+  },
+  {
     path: "/weight",
     name: "weight",
     component: () => import("../views/WeightView.vue"),

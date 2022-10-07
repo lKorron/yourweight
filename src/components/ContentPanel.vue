@@ -44,7 +44,7 @@ const onClick = () => {
     return;
   }
 
-  router.push({ name: "home" });
+  router.back();
 };
 
 const isBackButton = toRef(props, "backButton");
