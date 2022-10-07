@@ -3,16 +3,16 @@
     <div class="not-found__image">
       <img src="../assets/not-found.png" alt="not found" />
       <h2 class="not-found__header">Страница не найдена</h2>
+      <router-link :to="{ name: 'home' }">На главную</router-link>
     </div>
   </div>
 </template>
 
-<script>
-export default {};
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 @import "../styles/mixins";
+@import "../styles/variables";
 
 .not-found {
   &__image {
@@ -21,6 +21,7 @@ export default {};
   }
 
   &__header {
+    font-size: 35px;
   }
 }
 </style>
