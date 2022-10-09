@@ -20,6 +20,17 @@ const periodDataModule = {
     getPeriod(state) {
       return state.periodData;
     },
+    getDays(state) {
+      return Array.from(state.periodData.keys());
+    },
+    getCalories(state, getters) {
+      const days = getters.getDays;
+      const caloriesArray = [];
+      days.forEach((day) => {
+        caloriesArray.push(getters.getDailyCalories(day));
+      });
+      return caloriesArray;
+    },
   },
   mutations: {
     setDailyData(state, [key, value]) {

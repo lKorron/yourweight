@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from "vue";
+import { computed, defineProps, getCurrentInstance } from "vue";
 import { useStore } from "vuex";
 import { Line } from "vue-chartjs";
 import {
@@ -48,11 +48,11 @@ const props = defineProps({
   },
   width: {
     type: Number,
-    default: 400,
+    default: 500,
   },
   height: {
     type: Number,
-    default: 400,
+    default: 500,
   },
   cssClasses: {
     default: "",
@@ -68,20 +68,55 @@ const props = defineProps({
   },
 });
 
+const store = useStore();
+
+const days = computed(() => store.getters["periodDataModule/getDays"]);
+const calories = computed(() => store.getters["periodDataModule/getCalories"]);
+
+const commonCalories = computed(
+  () => store.getters["caloriesModule/getCommonCalories"]
+);
+
+const targetCalories = computed(
+  () => store.getters["caloriesModule/getTargetCalories"]
+);
+
+const createPointLine = (value, pointCount) => {
+  const pointArray = [];
+  for (let i = 0; i < pointCount; i++) {
+    pointArray.push(value);
+  }
+
+  return pointArray;
+};
+
 const chartData = {
-  labels: ["January", "February", "March"],
-  datasets: [{ data: [40, 20, 12] }, { data: [15, 15, 15] }],
+  labels: days.value,
+  datasets: [
+    {
+      label: "Калории для изменения веса",
+      backgroundColor: "green",
+      borderColor: "green",
+      data: createPointLine(targetCalories.value, days.value.length),
+    },
+    {
+      label: "Калории для поддержания веса",
+      backgroundColor: "yellow",
+      borderColor: "yellow",
+      data: createPointLine(commonCalories.value, days.value.length),
+    },
+    {
+      label: "Калории",
+      backgroundColor: "rgb(72, 169, 238)",
+      borderColor: "rgb(72, 169, 238)",
+      data: calories.value,
+    },
+  ],
 };
 
 const chartOptions = {
   responsive: true,
 };
-
-const store = useStore();
-
-const periodMap = computed(() => store.getters["periodDataModule/getPeriod"]);
-
-console.log(periodMap);
 </script>
 
 <style lang="scss" scoped></style>
