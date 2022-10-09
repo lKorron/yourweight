@@ -32,11 +32,6 @@ const props = defineProps({
 
 const { height, weight, age, targetWeight, coeff, sex } = toRefs(props);
 
-onMounted(() => {
-  loadWeightToStorage("setCommonCalories", bmr(weight.value));
-  loadWeightToStorage("setTargetCalories", bmr(targetWeight.value));
-});
-
 const bmr = (weight) => {
   if (Object.values(props).includes(null)) {
     return "-";
@@ -67,6 +62,9 @@ const loadWeightToStorage = (action, weight) => {
     store.dispatch(`caloriesModule/${action}`, weight);
   }
 };
+
+loadWeightToStorage("setCommonCalories", bmr(weight.value));
+loadWeightToStorage("setTargetCalories", bmr(targetWeight.value));
 </script>
 
 <style lang="scss" scoped>

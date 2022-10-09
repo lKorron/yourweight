@@ -1,6 +1,6 @@
 <template>
-  <div>graph</div>
   <Line
+    class="graph"
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, defineProps, getCurrentInstance } from "vue";
+import { computed, defineProps, reactive } from "vue";
 import { useStore } from "vuex";
 import { Line } from "vue-chartjs";
 import {
@@ -90,7 +90,7 @@ const createPointLine = (value, pointCount) => {
   return pointArray;
 };
 
-const chartData = {
+const chartData = reactive({
   labels: days.value,
   datasets: [
     {
@@ -112,11 +112,16 @@ const chartData = {
       data: calories.value,
     },
   ],
-};
+});
 
 const chartOptions = {
   responsive: true,
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.graph {
+  margin: 0 auto;
+  max-width: 500px;
+}
+</style>
