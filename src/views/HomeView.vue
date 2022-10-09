@@ -30,7 +30,8 @@
     <content-panel>
       <template #header>Что я сегодня съел?</template>
       <template #default>
-        <router-link class="image-link" to="eatedToday">
+        <div v-if="isPreviewAvailable">Preview этот день</div>
+        <router-link v-else class="image-link" to="eatedToday">
           <img src="../assets/plus.png" alt="plus"
         /></router-link>
       </template>
@@ -38,7 +39,8 @@
     <content-panel>
       <template #header>Прогресс по датам</template>
       <template #default>
-        <router-link class="image-link" to="period">
+        <div v-if="isPreviewAvailable">Preview все дни</div>
+        <router-link v-else class="image-link" to="period">
           <img src="../assets/calendar.png" alt="plus"
         /></router-link>
       </template>
@@ -58,10 +60,16 @@ import CalculatedCalories from "../components/CalculatedCalories.vue";
 import EatedToday from "../components/EatedToday.vue";
 
 import { useStore } from "vuex";
+import { computed } from "vue";
 import PeriodGraph from "@/components/PeriodGraph.vue";
 
 const store = useStore();
-const userData = store.getters["userDataModule/getUserData"];
+const userData = computed(() => store.getters["userDataModule/getUserData"]);
+const periodData = computed(() => store.getters["periodDataModule/getPeriod"]);
+
+const isPreviewAvailable = computed(() => periodData.value.size > 0);
+
+console.log(periodData.value.size);
 </script>
 
 <style lang="scss" scoped>
