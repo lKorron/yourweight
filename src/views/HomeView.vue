@@ -44,6 +44,11 @@
       </template>
     </content-panel>
   </div>
+
+  <content-panel>
+    <template #header>График</template>
+    <template #default><period-graph></period-graph></template>
+  </content-panel>
 </template>
 
 <script setup>
@@ -53,6 +58,7 @@ import CalculatedCalories from "../components/CalculatedCalories.vue";
 import EatedToday from "../components/EatedToday.vue";
 
 import { useStore } from "vuex";
+import PeriodGraph from "@/components/PeriodGraph.vue";
 
 const store = useStore();
 const userData = store.getters["userDataModule/getUserData"];
