@@ -1,6 +1,7 @@
 <template>
   <Line
     class="graph"
+    v-if="isGraphAvailable"
     :chart-options="chartOptions"
     :chart-data="chartData"
     :chart-id="chartId"
@@ -11,6 +12,7 @@
     :width="width"
     :height="height"
   ></Line>
+  <div v-else>Заполните хотя бы два дня, чтобы отобразить график</div>
 </template>
 
 <script setup>
@@ -80,6 +82,11 @@ const commonCalories = computed(
 const targetCalories = computed(
   () => store.getters["caloriesModule/getTargetCalories"]
 );
+
+const isGraphAvailable = computed(() => {
+  if (days.value.length >= 2) return true;
+  return false;
+});
 
 const createPointLine = (value, pointCount) => {
   const pointArray = [];
