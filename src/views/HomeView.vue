@@ -30,19 +30,27 @@
     <content-panel>
       <template #header>Что я сегодня съел?</template>
       <template #default>
-        <div v-if="isPreviewAvailable">Preview этот день</div>
-        <router-link v-else class="image-link" to="eatedToday">
-          <img src="../assets/plus.png" alt="plus"
-        /></router-link>
+        <router-link class="link" to="eatedToday">
+          <div v-if="isPreviewAvailable" class="preview preview_today">
+            <period-cards cards-count="1" preview></period-cards>
+          </div>
+          <div v-else class="link__image image-link">
+            <img src="../assets/plus.png" alt="plus" />
+          </div>
+        </router-link>
       </template>
     </content-panel>
     <content-panel>
       <template #header>Прогресс по датам</template>
       <template #default>
-        <div v-if="isPreviewAvailable">Preview все дни</div>
-        <router-link v-else class="image-link" to="period">
-          <img src="../assets/calendar.png" alt="plus"
-        /></router-link>
+        <router-link class="link" to="period">
+          <div v-if="isPreviewAvailable" class="preview preview_period">
+            <period-cards cards-count="3" preview></period-cards>
+          </div>
+          <div v-else class="link__image image-link">
+            <img src="../assets/calendar.png" alt="plus" />
+          </div>
+        </router-link>
       </template>
     </content-panel>
   </div>
@@ -62,14 +70,13 @@ import EatedToday from "../components/EatedToday.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
 import PeriodGraph from "@/components/PeriodGraph.vue";
+import PeriodCards from "@/components/PeriodCards.vue";
 
 const store = useStore();
 const userData = computed(() => store.getters["userDataModule/getUserData"]);
 const periodData = computed(() => store.getters["periodDataModule/getPeriod"]);
 
 const isPreviewAvailable = computed(() => periodData.value.size > 0);
-
-console.log(periodData.value.size);
 </script>
 
 <style lang="scss" scoped>
@@ -97,5 +104,29 @@ console.log(periodData.value.size);
     background: none;
     border: none;
   }
+}
+
+.preview {
+  transition: transform 0.25s;
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  &_today {
+    margin: 0 auto;
+    max-width: 170px;
+  }
+
+  &_period {
+    display: grid;
+    grid-template-columns: repeat(3, 170px);
+    gap: 10px;
+  }
+}
+
+.link {
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
 }
 </style>

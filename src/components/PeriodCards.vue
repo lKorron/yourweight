@@ -32,7 +32,7 @@ import { useStore } from "vuex";
 
 const props = defineProps({
   cardsCount: {
-    type: Number,
+    type: [String, Number],
     required: false,
   },
   preview: {
