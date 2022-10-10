@@ -21,12 +21,37 @@ Object.entries(userData).forEach(([, value]) => {
 </script>
 
 <style lang="scss">
+@import "./styles/variables";
+
+@import url(https://fonts.googleapis.com/css?family=Kelly+Slab:regular);
+@import "https://fonts.googleapis.com/css?family=Bellota:300,300italic,regular,italic,700,700italic";
+@import "https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $mainColor;
+}
+
+.app-name {
+  font-family: Kelly Slab;
+  color: black;
+  position: relative;
+}
+
+h2 {
+  font-family: Kelly Slab;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 44px;
+
+  color: #000000;
+}
+
+h3 {
+  font-family: Bellota;
 }
 
 .wrapper {
@@ -40,11 +65,16 @@ Object.entries(userData).forEach(([, value]) => {
 }
 
 body {
-  $bg-size: 370px;
-  background-color: #fff;
-  background-image: url("./assets/background.jpeg");
-  background-repeat: repeat;
-  background-size: $bg-size;
+  $bg-size: 950px;
+  background: linear-gradient(
+    120.1deg,
+    #62a1ff 15.75%,
+    rgba(240, 159, 133, 0.723958) 38.68%,
+    rgba(239, 185, 141, 0.479167) 55.98%,
+    rgba(220, 156, 82, 0.34375) 74.08%,
+    #ffccc9 92.99%
+  );
+  //background-size: $bg-size;
 }
 
 .button {

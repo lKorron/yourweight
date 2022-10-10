@@ -1,8 +1,7 @@
 @import "./_variables.scss";
 
 @mixin setPlane($maxWidth: none) {
-    border: 1px solid $mainColor;
-    border-radius: 10px;
+    border: 1px solid transparent;
     background-color: #fff;
     max-width: $maxWidth;
     margin: 0 auto;
