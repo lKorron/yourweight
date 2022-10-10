@@ -1,35 +1,47 @@
 <template>
-  <div class="period-progress">
-    <div
-      v-for="[date, value] in periodDays"
-      :key="date"
-      class="period-progress__card card"
-    >
-      <div class="card__data">{{ date }}</div>
-      <div class="card__eated">
-        <eated-list :food-list="value" preview></eated-list>
-      </div>
-      <div
-        class="card__calories calories"
-        :class="[isPurposeComplete(date) ? 'calories_green' : 'calories_red']"
-      >
-        {{ getCalories(date) }}/{{ targetCalories }}
-      </div>
-
-      <router-link
-        class="image-link card__link"
-        :to="{ name: 'date', params: { date: convertDate(date) } }"
-      >
-        <img src="../assets/editing.png" alt="edit"
-      /></router-link>
+  <div
+    v-for="[date, value] in periodDays"
+    :key="date"
+    class="period-progress__card card"
+  >
+    <div class="card__data">{{ date }}</div>
+    <div class="card__eated">
+      <eated-list :food-list="value" preview></eated-list>
     </div>
+    <div
+      class="card__calories calories"
+      :class="[isPurposeComplete(date) ? 'calories_green' : 'calories_red']"
+    >
+      {{ getCalories(date) }}/{{ targetCalories }}
+    </div>
+
+    <router-link
+      v-if="!preview"
+      class="image-link card__link"
+      :to="{ name: 'date', params: { date: convertDate(date) } }"
+    >
+      <img src="../assets/editing.png" alt="edit"
+    /></router-link>
   </div>
 </template>
 
 <script setup>
 import EatedList from "./EatedList.vue";
-import { onMounted, computed } from "vue";
+import { defineProps, computed, toRefs } from "vue";
 import { useStore } from "vuex";
+
+const props = defineProps({
+  cardsCount: {
+    type: Number,
+    required: false,
+  },
+  preview: {
+    type: Boolean,
+    required: false,
+  },
+});
+
+const { cardsCount } = toRefs(props);
 
 const store = useStore();
 
@@ -41,7 +53,12 @@ const targetCalories = computed(
   () => store.getters["caloriesModule/getTargetCalories"]
 );
 
-const periodDays = computed(() => store.getters["periodDataModule/getPeriod"]);
+const periodDays = computed(() => {
+  if (cardsCount.value) {
+    return store.getters["periodDataModule/getPartialPeriod"](cardsCount.value);
+  }
+  return store.getters["periodDataModule/getPeriod"];
+});
 
 const isPurposeComplete = (date) => {
   const isGaining = commonCalories.value < targetCalories.value;
@@ -90,13 +107,6 @@ const foodList1 = [
 
 .image-link {
   @include sizeImgContainer(20px);
-}
-
-.period-progress {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding: 20px;
 }
 
 .card {

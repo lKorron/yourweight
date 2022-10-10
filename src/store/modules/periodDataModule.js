@@ -20,6 +20,10 @@ const periodDataModule = {
     getPeriod(state) {
       return state.periodData;
     },
+    getPartialPeriod: (state) => (count) => {
+      const slicedArray = Array.from(state.periodData).slice(0, count);
+      return new Map(slicedArray);
+    },
     getDays(state) {
       return Array.from(state.periodData.keys());
     },
