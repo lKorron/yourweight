@@ -84,8 +84,7 @@ const targetCalories = computed(
 );
 
 const isGraphAvailable = computed(() => {
-  if (days.value.length >= 2) return true;
-  return false;
+  return days.value.length >= 2;
 });
 
 const createPointLine = (value, pointCount) => {
