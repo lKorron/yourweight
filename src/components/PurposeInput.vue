@@ -11,7 +11,7 @@
       </ErrorMessage>
     </div>
 
-    <button class="button">ок</button>
+    <button class="purpose-input__button button">ок</button>
   </Form>
 </template>
 
@@ -41,6 +41,10 @@ const onSubmit = () => {
   input {
     width: 30px;
     margin-left: 18px;
+  }
+
+  &__button {
+    margin-top: 15px;
   }
 
   > :not(:last-child) {

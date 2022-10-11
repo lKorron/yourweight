@@ -55,8 +55,10 @@
       </div>
 
       <div class="user-input__coeff coeff">
-        <label for="">Выберете коэффициент активности:</label>
-        <Field v-model="coeff" name="coeff" as="select"
+        <label class="coeff__label" for=""
+          >Выберете коэффициент активности:</label
+        >
+        <Field class="coeff__select" v-model="coeff" name="coeff" as="select"
           ><option value="1.2">Минимальный уровень активности — 1.2</option>
           <option value="1.375">Низкий уровень активности — 1.375</option>
           <option value="1.55" selected>
@@ -209,6 +211,12 @@ defineRule("sex", (value) => {
 
   &__button {
     margin-top: 20px;
+  }
+}
+
+.coeff {
+  &__select {
+    margin-top: 10px;
   }
 }
 </style>

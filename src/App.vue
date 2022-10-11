@@ -34,6 +34,10 @@ Object.entries(userData).forEach(([, value]) => {
   color: $mainColor;
 }
 
+select {
+  font-family: Montserrat;
+}
+
 .app-name {
   display: inline-block;
   font-family: Kelly Slab;
