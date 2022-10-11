@@ -23,7 +23,7 @@ Object.entries(userData).forEach(([, value]) => {
 <style lang="scss">
 @import "./styles/variables";
 
-@import url(https://fonts.googleapis.com/css?family=Kelly+Slab:regular);
+@import "https://fonts.googleapis.com/css?family=Kelly+Slab:regular";
 @import "https://fonts.googleapis.com/css?family=Bellota:300,300italic,regular,italic,700,700italic";
 @import "https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900";
 #app {
@@ -35,9 +35,21 @@ Object.entries(userData).forEach(([, value]) => {
 }
 
 .app-name {
+  display: inline-block;
   font-family: Kelly Slab;
   color: black;
   position: relative;
+
+  &::before {
+    width: 80px;
+    height: 80px;
+    content: " ";
+    background-image: url("./assets/logo.png");
+    background-size: 80px;
+    position: absolute;
+    left: -75px;
+    top: -22px;
+  }
 }
 
 h2 {
@@ -66,15 +78,16 @@ h3 {
 
 body {
   $bg-size: 950px;
-  background: linear-gradient(
-    120.1deg,
-    #62a1ff 15.75%,
-    rgba(240, 159, 133, 0.723958) 38.68%,
-    rgba(239, 185, 141, 0.479167) 55.98%,
-    rgba(220, 156, 82, 0.34375) 74.08%,
-    #ffccc9 92.99%
-  );
   //background-size: $bg-size;
+  background: linear-gradient(
+      120.1deg,
+      #62a1ff 15.75%,
+      rgba(240, 159, 133, 0.723958) 38.68%,
+      rgba(239, 185, 141, 0.479167) 55.98%,
+      rgba(220, 156, 82, 0.34375) 74.08%,
+      #ffccc9 92.99%
+    )
+    fixed;
 }
 
 .button {

@@ -60,7 +60,7 @@ const isCustomRoute = toRef(props, "customRoute");
   margin-bottom: 30px;
 
   &__header {
-    text-decoration: underline;
+    //text-decoration: underline;
   }
 
   &__content {
