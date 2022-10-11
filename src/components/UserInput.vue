@@ -94,7 +94,7 @@
         </ErrorMessage>
       </div>
 
-      <button>Готово</button>
+      <button class="user-input__button button">Готово</button>
     </Form>
   </div>
 </template>
@@ -177,8 +177,6 @@ defineRule("sex", (value) => {
 }
 
 .user-input {
-  border: 1px solid $mainColor;
-  border-radius: 10px;
   padding: 10px;
 
   &__number-group {
@@ -207,6 +205,10 @@ defineRule("sex", (value) => {
 
   &__sex {
     margin-top: 15px;
+  }
+
+  &__button {
+    margin-top: 20px;
   }
 }
 </style>

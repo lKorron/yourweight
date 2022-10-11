@@ -91,6 +91,7 @@ body {
 }
 
 .button {
+  font-family: Montserrat;
   background-color: rgb(82, 176, 249);
   border: none;
   padding: 10px;

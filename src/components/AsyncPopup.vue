@@ -12,7 +12,9 @@
           >
         </div>
 
-        <slot name="button"><button @click="close">Закрыть</button></slot>
+        <slot name="button"
+          ><button class="button" @click="close">Закрыть</button></slot
+        >
       </div>
     </div>
   </Transition>

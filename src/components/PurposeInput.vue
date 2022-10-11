@@ -11,7 +11,7 @@
       </ErrorMessage>
     </div>
 
-    <button>ок</button>
+    <button class="button">ок</button>
   </Form>
 </template>
 
