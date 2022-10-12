@@ -1,6 +1,10 @@
 <template>
   <Transition name="popup" appear>
-    <div v-if="isOpen" class="backdrop" @click="ignoreKeys ? '' : close()">
+    <div
+      v-if="isOpen"
+      class="backdrop dark-background"
+      @click="ignoreKeys ? '' : close()"
+    >
       <div class="popup" @click.stop>
         <h2 class="popup__header"><slot name="header">Заголовок</slot></h2>
         <div class="popup__content">
@@ -25,6 +29,11 @@ export default {
   props: {
     ignoreKeys: {
       type: Boolean,
+      required: false,
+    },
+    darkBackground: {
+      type: Boolean,
+      required: false,
     },
   },
 
@@ -92,6 +101,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.dark-background {
+  background-color: rgba($color: #000, $alpha: 0.3);
 }
 
 .popup {
