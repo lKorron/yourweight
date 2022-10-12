@@ -31,6 +31,11 @@
       <img src="../assets/editing.png" alt="edit"
     /></router-link>
   </div>
+  <div v-if="!preview" class="add-card">
+    <button class="add-card__button button">
+      <img src="../assets/plus.png" alt="add button" />
+    </button>
+  </div>
 </template>
 
 <script setup>
@@ -134,6 +139,21 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
     position: absolute;
     top: 5px;
     right: 5px;
+  }
+}
+
+.add-card {
+  border: 1px dashed rgba($color: #000, $alpha: 0.4);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  &__button {
+    @include sizeImgContainer(60px);
+    border: none;
+    background: none;
+    padding: 0;
   }
 }
 
