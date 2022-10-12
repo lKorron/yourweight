@@ -44,10 +44,18 @@ const periodDataModule = {
 
       localStorage.setItem("periodData", JSON.stringify(period));
     },
+    deleteDay(state, date) {
+      state.periodData.delete(date);
+      const period = Object.fromEntries(state.periodData);
+      localStorage.setItem("periodData", JSON.stringify(period));
+    },
   },
   actions: {
     setDailyData(context, [key, value]) {
       context.commit("setDailyData", [key, value]);
+    },
+    deleteDay(context, date) {
+      context.commit("deleteDay", date);
     },
   },
 };

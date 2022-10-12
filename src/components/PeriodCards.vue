@@ -15,6 +15,14 @@
       {{ getCalories(date) }}/{{ targetCalories }}
     </div>
 
+    <button
+      v-if="!preview"
+      class="card__delete-button button"
+      @click="onDelete(date)"
+    >
+      <img src="../assets/delete.png" alt="delete button" />
+    </button>
+
     <router-link
       v-if="!preview"
       class="image-link card__link"
@@ -60,6 +68,10 @@ const periodDays = computed(() => {
   return store.getters["periodDataModule/getPeriod"];
 });
 
+const onDelete = (date) => {
+  store.dispatch("periodDataModule/deleteDay", date);
+};
+
 const isPurposeComplete = (date) => {
   const isGaining = commonCalories.value < targetCalories.value;
   let isComplete = false;
@@ -79,26 +91,6 @@ const getCalories = (date) =>
   store.getters["periodDataModule/getDailyCalories"](date);
 
 const convertDate = (dateString) => dateString.replaceAll("/", "-");
-
-const foodList1 = [
-  {
-    servingCount: 5,
-    name: "test",
-    imageUrl: "https://nix-tag-images.s3.amazonaws.com/3789_thumb.jpg",
-    calories: 500,
-    servingUnit: 12,
-  },
-  {
-    servingCount: 5,
-    name: "test",
-    imageUrl: "https://nix-tag-images.s3.amazonaws.com/3789_thumb.jpg",
-  },
-  {
-    servingCount: 5,
-    name: "test",
-    imageUrl: "https://nix-tag-images.s3.amazonaws.com/3789_thumb.jpg",
-  },
-];
 </script>
 
 <style lang="scss" scoped>
@@ -127,6 +119,15 @@ const foodList1 = [
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+  }
+
+  &__delete-button {
+    @include sizeImgContainer(20px);
+    position: absolute;
+    background: none;
+    border: none;
+    top: -5px;
+    left: -5px;
   }
 
   &__link {
