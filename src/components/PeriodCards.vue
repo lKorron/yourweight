@@ -32,15 +32,20 @@
     /></router-link>
   </div>
   <div v-if="!preview" class="add-card">
-    <button class="add-card__button button">
+    <button class="add-card__button button" @click="onAdd">
       <img src="../assets/plus.png" alt="add button" />
     </button>
   </div>
+  <async-popup ref="datePopup">
+    <template #header> Введите дату </template>
+    <template #default></template>
+  </async-popup>
 </template>
 
 <script setup>
+import AsyncPopup from "./AsyncPopup.vue";
 import EatedList from "./EatedList.vue";
-import { defineProps, computed, toRefs } from "vue";
+import { defineProps, computed, toRefs, ref } from "vue";
 import { useStore } from "vuex";
 
 const props = defineProps({
@@ -55,6 +60,7 @@ const props = defineProps({
 });
 
 const { cardsCount } = toRefs(props);
+const datePopup = ref(null);
 
 const store = useStore();
 
@@ -72,6 +78,10 @@ const periodDays = computed(() => {
   }
   return store.getters["periodDataModule/getPeriod"];
 });
+
+const onAdd = () => {
+  datePopup.value.open();
+};
 
 const onDelete = (date) => {
   store.dispatch("periodDataModule/deleteDay", date);
