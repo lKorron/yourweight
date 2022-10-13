@@ -18,7 +18,7 @@
     <button
       v-if="!preview"
       class="card__delete-button button"
-      @click="onDelete(date)"
+      @click="openDeletePopup(date)"
     >
       <img src="../assets/delete.png" alt="delete button" />
     </button>
@@ -40,6 +40,16 @@
     <template #header> Введите дату </template>
     <template #default></template>
   </async-popup>
+  <async-popup dark-background ref="deletePopup">
+    <template #header> Удалить выбранный день? </template>
+    <template #default>Данные за {{ chosenDate }} будут удалены</template>
+    <template #button>
+      <div class="button-group">
+        <button @click="onDelete" class="button">Удалить</button>
+        <button @click="closeDeletePopup" class="button">Отмена</button>
+      </div>
+    </template>
+  </async-popup>
 </template>
 
 <script setup>
@@ -60,7 +70,10 @@ const props = defineProps({
 });
 
 const { cardsCount } = toRefs(props);
+
 const datePopup = ref(null);
+const deletePopup = ref(null);
+const chosenDate = ref("");
 
 const store = useStore();
 
@@ -83,8 +96,18 @@ const onAdd = () => {
   datePopup.value.open();
 };
 
-const onDelete = (date) => {
-  store.dispatch("periodDataModule/deleteDay", date);
+const onDelete = () => {
+  closeDeletePopup();
+  store.dispatch("periodDataModule/deleteDay", chosenDate.value);
+};
+
+const closeDeletePopup = () => {
+  deletePopup.value.close();
+};
+
+const openDeletePopup = (date) => {
+  deletePopup.value.open();
+  chosenDate.value = date;
 };
 
 const isPurposeComplete = (date) => {
@@ -182,5 +205,12 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
 .calories_green {
   color: white;
   background-color: green;
+}
+
+.button-group {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  max-width: 220px;
 }
 </style>
