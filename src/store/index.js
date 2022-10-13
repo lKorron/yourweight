@@ -15,9 +15,9 @@ const initPeriod = (store) => {
   let periodData = JSON.parse(localStorage.getItem("periodData"));
 
   if (periodData) {
-    Object.entries(periodData).forEach(([key, value]) => {
-      store.dispatch("periodDataModule/setDailyData", [key, value]);
-    });
+    const dateMap = new Map(Object.entries(periodData));
+
+    store.dispatch("periodDataModule/setPeriod", dateMap);
   }
 };
 

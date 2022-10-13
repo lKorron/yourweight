@@ -51,6 +51,10 @@ const periodDataModule = {
       const period = Object.fromEntries(state.periodData);
       localStorage.setItem("periodData", JSON.stringify(period));
     },
+    setPeriod(state, dateMap) {
+      const sortedDateMap = sortDateMap(dateMap);
+      state.periodData = sortedDateMap;
+    },
   },
   actions: {
     setDailyData(context, [key, value]) {
@@ -59,10 +63,14 @@ const periodDataModule = {
     deleteDay(context, date) {
       context.commit("deleteDay", date);
     },
+    setPeriod(context, dateMap) {
+      context.commit("setPeriod", dateMap);
+    },
   },
 };
 
 const sortDateMap = (map) => {
+  console.log("sorting");
   const sortedMap = new Map(
     [...map.entries()].sort(([a], [b]) => {
       a = a.split("/").reverse().join("");
