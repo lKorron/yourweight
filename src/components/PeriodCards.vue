@@ -36,7 +36,7 @@
       <img src="../assets/plus.png" alt="add button" />
     </button>
   </div>
-  <async-popup ref="datePopup">
+  <async-popup dark-background ref="datePopup">
     <template #header> Введите дату </template>
     <template #default></template>
   </async-popup>

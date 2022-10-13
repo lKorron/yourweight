@@ -1,10 +1,6 @@
 <template>
   <Transition name="popup" appear>
-    <div
-      v-if="isOpen"
-      class="backdrop dark-background"
-      @click="ignoreKeys ? '' : close()"
-    >
+    <div v-if="isOpen" class="backdrop" @click="ignoreKeys ? '' : close()">
       <div class="popup" @click.stop>
         <h2 class="popup__header"><slot name="header">Заголовок</slot></h2>
         <div class="popup__content">
@@ -22,6 +18,7 @@
       </div>
     </div>
   </Transition>
+  <div v-if="isOpen && darkBackground" class="background dark-background"></div>
 </template>
 
 <script>
@@ -101,6 +98,16 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 2;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 .dark-background {
