@@ -105,7 +105,6 @@ const onDelete = () => {
 
 const closeDeletePopup = () => {
   deletePopup.value.close();
-  chosenDate.value = "";
 };
 
 const openDeletePopup = (date) => {
