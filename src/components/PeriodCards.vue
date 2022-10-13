@@ -193,6 +193,8 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  min-height: 109px;
+
   &__button {
     @include sizeImgContainer(60px);
     border: none;
