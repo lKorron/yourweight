@@ -69,9 +69,13 @@ const props = defineProps({
     type: Boolean,
     required: false,
   },
+  today: {
+    type: Boolean,
+    required: false,
+  },
 });
 
-const { cardsCount } = toRefs(props);
+const { cardsCount, today } = toRefs(props);
 
 const datePopup = ref(null);
 const deletePopup = ref(null);
@@ -91,6 +95,11 @@ const periodDays = computed(() => {
   if (cardsCount.value) {
     return store.getters["periodDataModule/getPartialPeriod"](cardsCount.value);
   }
+
+  if (today.value) {
+    return store.getters["periodDataModule/getTodayData"];
+  }
+
   return store.getters["periodDataModule/getPeriod"];
 });
 

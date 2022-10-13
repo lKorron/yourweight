@@ -1,10 +1,12 @@
+import moment from "moment";
+
 const periodDataModule = {
   namespaced: true,
   state: {
     periodData: new Map(),
   },
   getters: {
-    getDailyData(state, value) {
+    getDailyData: (state) => (value) => {
       return state.periodData.get(value);
     },
     getDailyCalories: (state) => (value) => {
@@ -17,6 +19,19 @@ const periodDataModule = {
 
       return summaryCalories;
     },
+    getTodayData(state) {
+      let date = moment().format("DD/MM/YYYY");
+      const value = state.periodData.get(date);
+
+      if (value) {
+        const map = new Map();
+        map.set(date, value);
+        return map;
+      }
+
+      return null;
+    },
+
     getPeriod(state) {
       return state.periodData;
     },
@@ -70,7 +85,6 @@ const periodDataModule = {
 };
 
 const sortDateMap = (map) => {
-  console.log("sorting");
   const sortedMap = new Map(
     [...map.entries()].sort(([a], [b]) => {
       a = a.split("/").reverse().join("");

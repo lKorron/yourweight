@@ -31,8 +31,8 @@
       <template #header>Что я сегодня съел?</template>
       <template #default>
         <router-link class="link" to="eatedToday">
-          <div v-if="isPreviewAvailable" class="preview preview_today">
-            <period-cards cards-count="1" preview></period-cards>
+          <div v-if="todayData" class="preview preview_today">
+            <period-cards today preview></period-cards>
           </div>
           <div v-else class="link__image image-link">
             <img src="../assets/plus.png" alt="plus" />
@@ -75,6 +75,9 @@ import PeriodCards from "@/components/PeriodCards.vue";
 const store = useStore();
 const userData = computed(() => store.getters["userDataModule/getUserData"]);
 const periodData = computed(() => store.getters["periodDataModule/getPeriod"]);
+const todayData = computed(
+  () => store.getters["periodDataModule/getTodayData"]
+);
 
 const isPreviewAvailable = computed(() => periodData.value.size > 0);
 </script>
