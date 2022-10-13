@@ -11,10 +11,13 @@ import router from "@/router";
 import { Form, Field } from "vee-validate";
 
 const onSubmit = ({ date }) => {
-  router.push({ name: "date", params: { date } });
+  router.push({ name: "date", params: { date: convertDate(date) } });
 };
 
-const convertDate = (date) => {};
+const convertDate = (date) => {
+  const dayjs = require("dayjs");
+  return dayjs(date).format("DD-MM-YYYY");
+};
 </script>
 
 <style lang="scss" scoped>
