@@ -26,6 +26,14 @@ defineRule("number", (value) => {
   return true;
 });
 
+defineRule("date", (value) => {
+  if (value) {
+    return true;
+  }
+
+  return "Введите дату";
+});
+
 createApp(App)
   .use(store)
   .use(router)

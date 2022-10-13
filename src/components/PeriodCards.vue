@@ -38,7 +38,8 @@
   </div>
   <async-popup dark-background ref="datePopup">
     <template #header> Введите дату </template>
-    <template #default></template>
+    <template #default> <date-input></date-input> </template>
+    <template #button> <div></div> </template>
   </async-popup>
   <async-popup dark-background ref="deletePopup">
     <template #header> Удалить выбранный день? </template>
@@ -57,6 +58,7 @@ import AsyncPopup from "./AsyncPopup.vue";
 import EatedList from "./EatedList.vue";
 import { defineProps, computed, toRefs, ref } from "vue";
 import { useStore } from "vuex";
+import DateInput from "./DateInput.vue";
 
 const props = defineProps({
   cardsCount: {
@@ -103,6 +105,7 @@ const onDelete = () => {
 
 const closeDeletePopup = () => {
   deletePopup.value.close();
+  chosenDate.value = "";
 };
 
 const openDeletePopup = (date) => {
