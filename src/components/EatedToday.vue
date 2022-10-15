@@ -19,13 +19,19 @@
             {{ servingUnit }}
           </div>
           <div class="add__calories">({{ allCalories }} ккал)</div>
-          <button>+</button>
+          <button class="add__button button">
+            <img src="../assets/plus-2.png" alt="plus" />
+          </button>
         </Form>
       </div>
     </div>
     <today-progress :todayCalories="caloriesToday"></today-progress>
     <div class="date">{{ currentDate }}</div>
-    <eated-list :foodList="foodList" @delete-item="onDeleteItem"></eated-list>
+    <eated-list
+      :foodList="foodList"
+      @delete-item="onDeleteItem"
+      class="eated-list"
+    ></eated-list>
     <button
       @click="onSave"
       :disabled="isButtonDisabled"
@@ -163,11 +169,7 @@ const onFoodChosen = (foodName, photoUrl) => {
 </script>
 
 <style lang="scss" scoped>
-.eated-today {
-  &__button {
-    margin-top: 20px;
-  }
-}
+@import "../styles/mixins";
 
 .food-present {
   &__body {
@@ -195,5 +197,16 @@ const onFoodChosen = (foodName, photoUrl) => {
   &__input {
     width: 18px;
   }
+
+  &__button {
+    @include sizeImgContainer($size: 20px);
+    background: none;
+    padding: 0;
+  }
+}
+
+.eated-list,
+.date {
+  margin-bottom: 20px;
 }
 </style>

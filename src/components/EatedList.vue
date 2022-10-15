@@ -17,8 +17,13 @@
       <div v-if="!preview" class="item__calories">
         {{ foodItem.calories }} Ккал
       </div>
-      <div v-if="!preview" class="item__delete">
-        <button @click="deleteItem(foodItem.name)">x</button>
+      <div v-if="!preview" class="item__delete delete">
+        <button
+          @click="deleteItem(foodItem.name)"
+          class="delete__button button"
+        >
+          <img src="../assets/minus.png" alt="minus" />
+        </button>
       </div>
     </li>
   </ul>
@@ -60,6 +65,7 @@ const deleteItem = (name) => {
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/mixins";
 .eated-list {
   list-style: none;
   margin: 0;
@@ -79,6 +85,21 @@ const deleteItem = (name) => {
 
     :first-child {
       padding-left: 5px;
+    }
+  }
+  .delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    &__button {
+      @include sizeImgContainer($size: 20px);
+      background: none;
+      padding: 0;
+
+      img {
+        padding: 0;
+      }
     }
   }
 }
