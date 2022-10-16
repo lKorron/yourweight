@@ -40,8 +40,10 @@
         </router-link>
       </template>
     </content-panel>
-    <content-panel>
-      <template #header>Прогресс по датам</template>
+    <content-panel class="progress-panel">
+      <template #header>
+        <div class="progress-panel__header">Прогресс по датам</div>
+      </template>
       <template #default>
         <router-link class="link" to="period">
           <div v-if="isPreviewAvailable" class="preview preview_period">
@@ -131,5 +133,12 @@ const isPreviewAvailable = computed(() => periodData.value.size > 0);
   display: inline-block;
   color: inherit;
   text-decoration: none;
+}
+
+.progress-panel {
+  &__header {
+    max-width: 300px;
+    margin: 0 auto;
+  }
 }
 </style>
