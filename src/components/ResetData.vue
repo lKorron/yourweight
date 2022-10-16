@@ -1,7 +1,14 @@
 <template>
   <Form @submit="onSubmit" v-slot="{ meta }" class="reset-form">
-    <label for="input">Чтобы сбросить данные, введите: "Сбросить данные"</label>
-    <Field type="input" name="input" rules="danger:Сбросить данные"></Field>
+    <label for="reset-input"
+      >Чтобы сбросить данные, введите: "Сбросить данные"</label
+    >
+    <Field
+      id="reset-input"
+      type="input"
+      name="reset-input"
+      rules="danger:Сбросить данные"
+    ></Field>
     <Field
       type="submit"
       name="button"
@@ -9,7 +16,7 @@
       class="reset-form__button button"
       :disabled="!meta.valid"
     ></Field>
-    <ErrorMessage name="input" v-slot="{ message }"
+    <ErrorMessage name="reset-input" v-slot="{ message }"
       ><div class="error-message">{{ message }}</div></ErrorMessage
     >
   </Form>
@@ -17,9 +24,10 @@
 
 <script setup>
 import { Form, Field, ErrorMessage, defineRule } from "vee-validate";
+import { defineEmits } from "vue";
 
 const onSubmit = () => {
-  console.log("submitted");
+  console.log("danger action");
 };
 
 defineRule("danger", (value, [sentance]) => {
@@ -34,7 +42,17 @@ defineRule("danger", (value, [sentance]) => {
 <style lang="scss" scoped>
 .reset-form {
   &__button {
+    display: block;
+    margin: 0 auto;
     cursor: pointer;
+  }
+
+  label {
+    display: block;
+  }
+
+  > :not(:last-child) {
+    margin-bottom: 20px;
   }
 }
 
