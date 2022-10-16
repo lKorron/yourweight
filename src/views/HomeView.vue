@@ -7,7 +7,7 @@
         :targetWeight="userData.targetWeight"
       ></current-state>
       <div class="main-progress__link-group">
-        <button class="main-progress__reset-button button">
+        <button @click="onReset" class="main-progress__reset-button button">
           <img src="../assets/reset.png" alt="reset" />
         </button>
         <router-link to="weight" class="main-progress__link button"
@@ -66,6 +66,12 @@
     <template #header>График</template>
     <template #default><period-graph></period-graph></template>
   </content-panel>
+
+  <async-popup ref="resetPopup" dark-background>
+    <template #header>Сброс данных</template>
+    <template #default><reset-data></reset-data></template>
+    <template #button><div></div></template>
+  </async-popup>
 </template>
 
 <script setup>
@@ -75,9 +81,13 @@ import CalculatedCalories from "../components/CalculatedCalories.vue";
 import EatedToday from "../components/EatedToday.vue";
 
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import PeriodGraph from "@/components/PeriodGraph.vue";
 import PeriodCards from "@/components/PeriodCards.vue";
+import AsyncPopup from "@/components/AsyncPopup.vue";
+import ResetData from "@/components/ResetData.vue";
+
+const resetPopup = ref(null);
 
 const store = useStore();
 const userData = computed(() => store.getters["userDataModule/getUserData"]);
@@ -85,8 +95,11 @@ const periodData = computed(() => store.getters["periodDataModule/getPeriod"]);
 const todayData = computed(
   () => store.getters["periodDataModule/getTodayData"]
 );
-
 const isPreviewAvailable = computed(() => periodData.value.size > 0);
+
+const onReset = () => {
+  resetPopup.value.open();
+};
 </script>
 
 <style lang="scss" scoped>
