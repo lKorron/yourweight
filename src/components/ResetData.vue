@@ -25,9 +25,13 @@
 <script setup>
 import { Form, Field, ErrorMessage, defineRule } from "vee-validate";
 import { defineEmits } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const onSubmit = () => {
-  console.log("danger action");
+  localStorage.clear();
+  router.go();
 };
 
 defineRule("danger", (value, [sentance]) => {
