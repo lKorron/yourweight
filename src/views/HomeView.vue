@@ -6,7 +6,7 @@
         :weight="userData.weight"
         :targetWeight="userData.targetWeight"
       ></current-state>
-      <router-link to="weight" class="main-progress__about-link button">
+      <router-link to="about" class="main-progress__about-link button">
         <img src="../assets/about.png" alt="about" />
       </router-link>
       <div class="main-progress__link-group">
