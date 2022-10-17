@@ -6,11 +6,14 @@
         :weight="userData.weight"
         :targetWeight="userData.targetWeight"
       ></current-state>
+      <router-link to="weight" class="main-progress__about-link button">
+        <img src="../assets/about.png" alt="about" />
+      </router-link>
       <div class="main-progress__link-group">
         <button @click="onReset" class="main-progress__reset-button button">
           <img src="../assets/reset.png" alt="reset" />
         </button>
-        <router-link to="weight" class="main-progress__link button"
+        <router-link to="weight" class="main-progress__weight-link button"
           ><img src="../assets/weight-scale.png" alt="weight-scale"
         /></router-link>
       </div>
@@ -130,13 +133,21 @@ const onReset = () => {
     }
   }
 
-  &__link,
+  &__about-link,
+  &__weight-link,
   &__reset-button {
     display: block;
     @include sizeImgContainer($size: 35px);
     background: none;
     border: none;
     padding: 0;
+  }
+
+  &__about-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
   }
 }
 
