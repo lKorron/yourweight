@@ -7,8 +7,9 @@ test("sum of 2 numbers", () => {
 const promise = new Promise((resolve, reject) => resolve(3));
 
 describe("lol", () => {
+  console.log("lol log");
   test("should End of string g", async () => {
     const res = await promise;
-    expect(res).toBe(2);
+    expect(res).toBe(3);
   });
 });
