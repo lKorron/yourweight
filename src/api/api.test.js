@@ -27,9 +27,28 @@ describe("api: nutriens", () => {
 });
 
 describe("api: search", () => {
-  const testCases = [{}];
-});
+  const testCases = [
+    {
+      searchString: "milk",
+    },
+    {
+      searchString: "cof",
+    },
+    {
+      searchString: "a",
+    },
+    {
+      searchString: "adsa",
+    },
+  ];
 
-it("shold return correct info", async () => {
-  const response = await api.nutritionix.search("sd");
+  testCases.forEach((testCase) => {
+    it("shold return search list", async () => {
+      const response = await api.nutritionix.search(testCase.searchString);
+
+      const list = response.data.common;
+
+      expect(list).toBeInstanceOf(Array);
+    });
+  });
 });
