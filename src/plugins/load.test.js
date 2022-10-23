@@ -1,4 +1,7 @@
-const load = require("./load");
+import loadModule from "./load.js";
+
+const load = loadModule.load;
+
 let callback;
 let errorHandler;
 
