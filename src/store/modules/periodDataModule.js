@@ -1,5 +1,17 @@
 import moment from "moment";
 
+const sortDateMap = (map) => {
+  const sortedMap = new Map(
+    [...map.entries()].sort(([a], [b]) => {
+      a = a.split("/").reverse().join("");
+      b = b.split("/").reverse().join("");
+      return a > b ? 1 : a < b ? -1 : 0;
+    })
+  );
+
+  return sortedMap;
+};
+
 const periodDataModule = {
   namespaced: true,
   state: {
@@ -82,18 +94,8 @@ const periodDataModule = {
       context.commit("setPeriod", dateMap);
     },
   },
-};
 
-const sortDateMap = (map) => {
-  const sortedMap = new Map(
-    [...map.entries()].sort(([a], [b]) => {
-      a = a.split("/").reverse().join("");
-      b = b.split("/").reverse().join("");
-      return a > b ? 1 : a < b ? -1 : 0;
-    })
-  );
-
-  return sortedMap;
+  sortDateMap,
 };
 
 export default periodDataModule;
