@@ -44,3 +44,25 @@ describe("sortDateMap", () => {
     });
   });
 });
+
+describe("getDailyCalories", () => {
+  const testCases = [
+    {
+      foodList: [{ calories: 500 }, { calories: 600 }],
+      expectedCalories: 1100,
+    },
+  ];
+
+  testCases.forEach(({ foodList, expectedCalories }) => {
+    it("shold return numeric value of calories", () => {
+      const getDailyCalories = periodDataModule.getters.getDailyCalories;
+      const state = {
+        periodData: new Map([["04/04/22", foodList]]),
+      };
+
+      const calories = getDailyCalories(state)("04/04/22");
+
+      expect(calories).toBe(expectedCalories);
+    });
+  });
+});
