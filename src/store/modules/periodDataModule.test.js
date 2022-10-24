@@ -50,19 +50,35 @@ describe("getDailyCalories", () => {
     {
       foodList: [{ calories: 500 }, { calories: 600 }],
       expectedCalories: 1100,
+      date: "04/04/22",
+    },
+    {
+      foodList: [{ calories: 543 }, { calories: 621 }, { calories: 773 }],
+      expectedCalories: 1937,
+      date: "09/03/12",
+    },
+    {
+      foodList: [{ calories: 20.7 }, { calories: 400 }, { calories: 115.8 }],
+      expectedCalories: 536.5,
+      date: "25/03/32",
+    },
+    {
+      foodList: [{ calories: 200.1 }, { calories: 300.2 }],
+      expectedCalories: 500.3,
+      date: "05/11/18",
     },
   ];
 
-  testCases.forEach(({ foodList, expectedCalories }) => {
+  testCases.forEach(({ foodList, expectedCalories, date }) => {
     it("shold return numeric value of calories", () => {
       const getDailyCalories = periodDataModule.getters.getDailyCalories;
       const state = {
-        periodData: new Map([["04/04/22", foodList]]),
+        periodData: new Map([[date, foodList]]),
       };
 
-      const calories = getDailyCalories(state)("04/04/22");
+      const calories = getDailyCalories(state)(date);
 
-      expect(calories).toBe(expectedCalories);
+      expect(calories).toBeCloseTo(expectedCalories);
     });
   });
 });
