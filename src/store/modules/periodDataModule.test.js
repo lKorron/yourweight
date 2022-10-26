@@ -1,4 +1,5 @@
 import periodDataModule from "./periodDataModule";
+import moment from "moment";
 
 describe("sortDateMap", () => {
   const testCases = [
@@ -79,6 +80,44 @@ describe("getDailyCalories", () => {
       const calories = getDailyCalories(state)(date);
 
       expect(calories).toBeCloseTo(expectedCalories);
+    });
+  });
+});
+
+describe("getTodayData", () => {
+  const testCases = [
+    {
+      value: "data",
+      date: moment().format("DD/MM/YYYY"),
+    },
+    {
+      value: [1, 2, 3],
+      date: moment().format("DD/MM/YYYY"),
+    },
+    {
+      value: [1, 2, 3],
+      date: "02/09/22",
+    },
+    {
+      value: { data: "data" },
+      date: "02/09/22",
+    },
+  ];
+
+  testCases.forEach(({ value, date }) => {
+    it("should return new Map with today data or null", () => {
+      const getTodayData = periodDataModule.getters.getTodayData;
+
+      const state = { periodData: new Map([[date, value]]) };
+
+      const todayMap = getTodayData(state);
+
+      let expectedMap;
+      if (date !== moment().format("DD/MM/YYYY")) {
+        expectedMap = null;
+      } else expectedMap = new Map([[date, value]]);
+
+      expect(todayMap).toEqual(expectedMap);
     });
   });
 });
