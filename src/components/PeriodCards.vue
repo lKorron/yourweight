@@ -157,6 +157,7 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
   border: 1px solid #000;
   border-radius: 10px;
   position: relative;
+  max-width: 170px;
   .eated-list {
     border: none;
     outline: 1px solid black;

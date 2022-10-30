@@ -108,13 +108,17 @@ const onReset = () => {
 <style lang="scss" scoped>
 @import "../styles/mixins";
 @import "../styles/classes";
-
+@import "../styles/variables";
 .double-group {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 20px;
   .content-panel {
     width: 100%;
+  }
+
+  @media (max-width: $md1) {
+    display: block;
   }
 }
 
@@ -166,6 +170,14 @@ const onReset = () => {
     display: grid;
     grid-template-columns: repeat(3, 170px);
     gap: 10px;
+
+    @media (max-width: $md2) {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      row-gap: 50px;
+      padding: 20px;
+    }
   }
 }
 
