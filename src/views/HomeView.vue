@@ -153,6 +153,11 @@ const onReset = () => {
     left: 0;
     padding: 10px;
   }
+
+  @media (max-width: $md3) {
+    padding: 10px;
+    padding-top: 25px;
+  }
 }
 
 .preview {

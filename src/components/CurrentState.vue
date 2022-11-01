@@ -50,7 +50,7 @@ const complitionPercent = computed(() => {
 
 <style lang="scss">
 @import "../styles/_mixins.scss";
-
+@import "../styles/variables";
 .current-state {
   &__body {
     display: grid;
@@ -68,6 +68,10 @@ const complitionPercent = computed(() => {
       &::after {
         content: "%";
       }
+    }
+
+    @media (max-width: $md3) {
+      transform: scale(0.8);
     }
   }
 }
