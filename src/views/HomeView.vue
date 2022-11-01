@@ -1,5 +1,5 @@
 <template>
-  <content-panel class="main-progress">
+  <content-panel class="main-progress top-panel">
     <template #header>Общий прогресс</template>
     <template #default
       ><current-state
@@ -152,11 +152,6 @@ const onReset = () => {
     top: 0;
     left: 0;
     padding: 10px;
-  }
-
-  @media (max-width: $md3) {
-    padding: 10px;
-    padding-top: 25px;
   }
 }
 

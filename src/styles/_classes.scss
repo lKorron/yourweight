@@ -11,3 +11,10 @@
       transform: scale(1.1);
     }
   }
+
+  .top-panel {
+    @media (max-width: $md3) {
+      padding: 10px;
+      padding-top: 25px;
+    }
+  }

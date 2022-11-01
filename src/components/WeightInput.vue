@@ -41,10 +41,15 @@ const onSubmit = (values, { resetForm }) => {
 
 <style lang="scss" scoped>
 @import "../styles/mixins";
+@import "../styles/variables";
 .weight-input {
   &__image {
     @include sizeImgContainer($size: 300px);
     margin: 0 auto;
+
+    @media (max-width: $md3) {
+      @include sizeImgContainer($size: 200px);
+    }
   }
 }
 
