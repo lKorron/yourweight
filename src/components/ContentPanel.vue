@@ -13,7 +13,7 @@
         >
       </div>
       <button v-if="isBackButton" @click="onClick" class="back-button">
-        <img src="../assets/back.png" alt="назад" />
+        <img src="../assets/back.png" alt="back" />
       </button>
     </div>
   </transition>

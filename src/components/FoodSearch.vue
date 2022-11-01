@@ -143,7 +143,6 @@ const onItemClick = (foodName, photoUrl) => {
       }
     }
   }
-
   &__input {
     input {
       width: 280px;
@@ -165,6 +164,20 @@ const onItemClick = (foodName, photoUrl) => {
 
   &__icon {
     @include sizeImgContainer($size: 24px);
+  }
+
+  @media (max-width: $md3) {
+    display: flex;
+    &__input {
+      min-width: 50px;
+      width: 180px;
+      input {
+        width: 170px;
+      }
+    }
+
+    &__icon-box {
+    }
   }
 }
 

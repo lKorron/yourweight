@@ -1,5 +1,5 @@
 <template>
-  <content-panel back-button>
+  <content-panel back-button class="top-panel">
     <template #header>Что я сегодня съел?</template>
     <template #default>
       <eated-today></eated-today>
@@ -13,4 +13,6 @@ import EatedToday from "../components/EatedToday.vue";
 import router from "@/router";
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+@import "../styles/classes";
+</style>

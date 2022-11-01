@@ -65,6 +65,8 @@ const targetPercentage = computed(() => {
 </script>
 
 <style lang="scss">
+@import "../styles/variables";
+
 .today-progress {
   margin-bottom: 30px;
   .progress-bar {
@@ -73,6 +75,10 @@ const targetPercentage = computed(() => {
 
     &:not(:last-of-type) {
       margin-bottom: 10px;
+    }
+
+    @media (max-width: $md3) {
+      max-width: 100%;
     }
   }
 
