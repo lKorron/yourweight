@@ -141,6 +141,20 @@ const onItemClick = (foodName, photoUrl) => {
       &:not(:first-child) {
         border-top: 1px solid gray;
       }
+
+      @media (max-width: $md3) {
+        $padding-indent: 10px;
+        padding-top: $padding-indent;
+        padding-bottom: $padding-indent;
+        &__image {
+          transform: scale(0.8);
+        }
+      }
+    }
+
+    @media (max-width: $md3) {
+      max-width: 98.5%;
+      margin-left: 1px;
     }
   }
   &__input {
@@ -209,6 +223,12 @@ const onItemClick = (foodName, photoUrl) => {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  @media (max-width: $md3) {
+    &__image {
+      transform: scale(0.8);
+    }
   }
 }
 </style>
