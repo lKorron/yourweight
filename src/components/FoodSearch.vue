@@ -189,9 +189,6 @@ const onItemClick = (foodName, photoUrl) => {
         width: 170px;
       }
     }
-
-    &__icon-box {
-    }
   }
 }
 

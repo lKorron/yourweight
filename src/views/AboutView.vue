@@ -1,5 +1,5 @@
 <template>
-  <content-panel back-button>
+  <content-panel back-button class="top-panel">
     <template #header>О приложении</template>
     <template #default>
       <article class="about-article">
@@ -46,7 +46,9 @@ import ContentPanel from "@/components/ContentPanel.vue";
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/classes";
 .about-article {
+  padding: 10px;
   p {
     text-indent: 20px;
     text-align: justify;
@@ -73,6 +75,14 @@ import ContentPanel from "@/components/ContentPanel.vue";
 .row {
   &__header {
     margin: 0;
+  }
+
+  @media (max-width: $md3) {
+    display: block;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
   }
 }
 </style>
