@@ -4,8 +4,24 @@
     :key="date"
     class="period-progress__card card"
   >
-    <div class="card__data">
-      {{ date }}
+    <div class="card__header">
+      <button
+        v-if="!preview"
+        class="card__delete-button button"
+        @click="openDeletePopup(date)"
+      >
+        <img src="../assets/delete.png" alt="delete button" />
+      </button>
+
+      <div class="card__date">{{ date }}</div>
+
+      <router-link
+        v-if="!preview"
+        class="image-link card__link"
+        :to="{ name: 'date', params: { date: convertDate(date) } }"
+      >
+        <img src="../assets/editing.png" alt="edit"
+      /></router-link>
     </div>
     <div class="card__eated">
       <eated-list :food-list="value" preview></eated-list>
@@ -16,22 +32,6 @@
     >
       {{ getCalories(date) }}/{{ targetCalories }}
     </div>
-
-    <button
-      v-if="!preview"
-      class="card__delete-button button"
-      @click="openDeletePopup(date)"
-    >
-      <img src="../assets/delete.png" alt="delete button" />
-    </button>
-
-    <router-link
-      v-if="!preview"
-      class="image-link card__link"
-      :to="{ name: 'date', params: { date: convertDate(date) } }"
-    >
-      <img src="../assets/editing.png" alt="edit"
-    /></router-link>
   </div>
   <div v-if="!preview" class="add-card">
     <button class="add-card__button button" @click="onAdd">
@@ -166,27 +166,30 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
     outline: 1px solid black;
   }
 
-  &__data {
+  &__header {
     border-bottom: 1px solid #000;
     min-height: 30px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__date {
+    padding: 0 5px;
   }
 
   &__delete-button {
     @include sizeImgContainer(20px);
-    position: absolute;
     background: none;
     border: none;
-    top: -5px;
-    left: -5px;
+    padding: 0;
+    padding-left: 3px;
   }
 
   &__link {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+    margin: 0;
+    padding-right: 5px;
   }
 }
 
