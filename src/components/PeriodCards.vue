@@ -4,7 +4,9 @@
     :key="date"
     class="period-progress__card card"
   >
-    <div class="card__data">{{ date }}</div>
+    <div class="card__data">
+      {{ date }}
+    </div>
     <div class="card__eated">
       <eated-list :food-list="value" preview></eated-list>
     </div>
@@ -158,6 +160,7 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
   border-radius: 10px;
   position: relative;
   max-width: 170px;
+  margin: 0 auto;
   .eated-list {
     border: none;
     outline: 1px solid black;
@@ -195,6 +198,9 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
   justify-content: space-around;
   align-items: center;
   min-height: 109px;
+  max-width: 170px;
+  width: 100%;
+  margin: 0 auto;
 
   &__button {
     @include sizeImgContainer(60px);

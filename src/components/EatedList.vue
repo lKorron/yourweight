@@ -112,5 +112,13 @@ const deleteItem = (name) => {
       height: 50px;
     }
   }
+
+  &__name {
+    font-size: 14px;
+  }
+
+  :last-child {
+    padding-right: 5px;
+  }
 }
 </style>
