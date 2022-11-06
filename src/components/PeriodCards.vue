@@ -152,6 +152,14 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
   @include sizeImgContainer(20px);
 }
 
+.period-progress {
+  &__card {
+    @media (max-width: $md3) {
+      font-size: 12px;
+    }
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -210,6 +218,10 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
     border: none;
     background: none;
     padding: 0;
+
+    @media (max-width: $md3) {
+      transform: scale(0.8);
+    }
   }
 }
 

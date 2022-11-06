@@ -30,5 +30,8 @@ import PeriodCards from "@/components/PeriodCards.vue";
   @media (max-width: $md2) {
     grid-template-columns: repeat(2, 1fr);
   }
+  @media (max-width: $md3) {
+    padding: 0;
+  }
 }
 </style>

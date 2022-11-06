@@ -111,6 +111,16 @@ const deleteItem = (name) => {
     img {
       height: 50px;
     }
+
+    @media (max-width: $md3) {
+      padding-left: 0;
+      padding-right: 0;
+
+      height: 30px;
+      img {
+        height: 30px;
+      }
+    }
   }
 
   &__name {
