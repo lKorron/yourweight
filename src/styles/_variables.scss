@@ -1,6 +1,18 @@
 // $mainColor: #2c3e50;
 
 $mainColor: #000;
+$circleProgressColor: rgb(37 232 148);
+
+$normalWeightColor: rgb(128 197 222);
+$purposeWeigthColor: rgb(181 239 97);
+
+$normalSliderColor: $normalWeightColor;
+$purposeSliderColor: $purposeWeigthColor;
+
+$badDayColor: rgb(238 182 77);
+$goodDayColor: green;
+
+$caloriesColor: rgb(72, 169, 238);
 
 $md1: 880px;
 $md2: 590px;

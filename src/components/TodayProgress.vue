@@ -6,7 +6,7 @@
     </div>
     <ProgressBar
       class="progress-bar"
-      :bgcolor="'red'"
+      :bgcolor="normalSliderColor"
       :completed="commonPercentage"
     ></ProgressBar>
     <h3 class="today-progress__header">Прогресс изменения веса</h3>
@@ -15,7 +15,7 @@
     </div>
     <ProgressBar
       class="progress-bar"
-      :bgcolor="'darkcyan'"
+      :bgcolor="purposeSliderColor"
       :completed="targetPercentage"
     ></ProgressBar>
   </div>
@@ -24,6 +24,10 @@
 <script setup>
 import { ref, defineProps, computed, toRefs } from "vue";
 import { useStore } from "vuex";
+import {
+  normalSliderColor,
+  purposeSliderColor,
+} from "../styles/_export.module.scss";
 
 import ProgressBar from "./ProgressBar.vue";
 

@@ -14,7 +14,7 @@
       <div class="current-state__progress">
         <circle-progress
           :percent="complitionPercent"
-          :fill-color="'#31fe1d'"
+          :fill-color="circleProgressColor"
           :transition="200"
           show-percent
         />
@@ -27,6 +27,7 @@
 import "vue3-circle-progress/dist/circle-progress.css";
 import CircleProgress from "vue3-circle-progress";
 import { defineProps, computed, toRefs } from "vue";
+import { circleProgressColor } from "../styles/_export.module.scss";
 
 const props = defineProps({
   weight: Number,

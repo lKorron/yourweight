@@ -20,6 +20,11 @@ import { computed, defineProps, reactive } from "vue";
 import { useStore } from "vuex";
 import { Line } from "vue-chartjs";
 import {
+  normalWeightColor,
+  purposeWeightColor,
+  caloriesColor,
+} from "../styles/_export.module.scss";
+import {
   Chart as ChartJS,
   Title,
   Tooltip,
@@ -101,20 +106,20 @@ const chartData = reactive({
   datasets: [
     {
       label: "Калории для изменения веса",
-      backgroundColor: "green",
-      borderColor: "green",
+      backgroundColor: purposeWeightColor,
+      borderColor: purposeWeightColor,
       data: createPointLine(targetCalories.value, days.value.length),
     },
     {
       label: "Калории для поддержания веса",
-      backgroundColor: "yellow",
-      borderColor: "yellow",
+      backgroundColor: normalWeightColor,
+      borderColor: normalWeightColor,
       data: createPointLine(commonCalories.value, days.value.length),
     },
     {
       label: "Калории",
-      backgroundColor: "rgb(72, 169, 238)",
-      borderColor: "rgb(72, 169, 238)",
+      backgroundColor: caloriesColor,
+      borderColor: caloriesColor,
       data: calories.value,
     },
   ],

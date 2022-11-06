@@ -68,6 +68,7 @@ loadWeightToStorage("setTargetCalories", bmr(targetWeight.value));
 </script>
 
 <style lang="scss" scoped>
+@import "../styles/variables";
 .calculated-calories {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -90,11 +91,11 @@ loadWeightToStorage("setTargetCalories", bmr(targetWeight.value));
     }
 
     .value_normal {
-      background-color: yellow;
+      background-color: $normalWeightColor;
     }
 
     .value_purpose {
-      background-color: cyan;
+      background-color: $purposeWeigthColor;
     }
   }
 }

@@ -234,12 +234,12 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
 
 .calories_red {
   color: white;
-  background-color: red;
+  background-color: $badDayColor;
 }
 
 .calories_green {
   color: white;
-  background-color: green;
+  background-color: $goodDayColor;
 }
 
 .button-group {
