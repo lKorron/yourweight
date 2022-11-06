@@ -18,7 +18,7 @@
           show-percent
           is-gradient
           :gradient="{
-            angle: 90,
+            angle: 120,
             startColor: startCircleProgressColor,
             stopColor: endCircleProgressColor,
           }"
