@@ -217,6 +217,10 @@ defineRule("sex", (value) => {
 .coeff {
   &__select {
     margin-top: 10px;
+
+    @media (max-width: $md3) {
+      font-size: 10px;
+    }
   }
 }
 </style>
