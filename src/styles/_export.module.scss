@@ -1,11 +1,13 @@
 @import "./variables";
 
 :export {
-    circleProgressColor: $circleProgressColor;
+    startCircleProgressColor: $startCircleProgressColor;
+    endCircleProgressColor: $endCircleProgressColor;
     normalWeightColor: $normalWeightColor;
     purposeWeightColor:  $purposeWeigthColor;
     caloriesColor: $caloriesColor;
     normalSliderColor: $normalSliderColor;
     purposeSliderColor: $purposeSliderColor;
+    
 }
 
