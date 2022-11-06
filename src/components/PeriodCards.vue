@@ -179,7 +179,7 @@ const convertDate = (dateString) => dateString.replaceAll("/", "-");
     min-height: 30px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
   }
 
