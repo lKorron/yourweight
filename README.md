@@ -1,24 +1,17 @@
 # yourweight
 
-## Project setup
-```
-npm install
-```
+Приложение по контролю за весом.
+В зависимости от характеристик пользователя рассчитывает необходимые калории для употребления каждый день. В интерактивном поиске можно выбирвать съеденные за определенную дату продукты и их количество. (Пока работает только на английском языке)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![preview](/screenshots/fullpage.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+<div style="display: flex; gap: 20px;">
+ <img width="200" src="/screenshots/eated-phone.png"/>
+ <img width="204.3" src="/screenshots/weight-phone.png"/>
+ <img width="204.3" src="/screenshots/period-phone.png"/>
+ 
+</div>
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Stack
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+    vue3, vuex, vue-router, jest, scss, vee-validate, axios, etc.
