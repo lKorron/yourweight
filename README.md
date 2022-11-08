@@ -5,7 +5,7 @@
 
 ![preview](/screenshots/fullpage.png)
 
-<div style="display: flex; gap: 20px;">
+<div style="display: flex; justify-content: space-between;">
  <img width="200" src="/screenshots/eated-phone.png"/>
  <img width="204.3" src="/screenshots/weight-phone.png"/>
  <img width="204.3" src="/screenshots/period-phone.png"/>
