@@ -25,3 +25,11 @@
 ## Stack
 
     vue3, vuex, vue-router, jest, scss, vee-validate, axios, etc.
+
+<style>
+    .image-container {
+        display: flex;
+        justify-content: space-between;
+
+    }
+</style>
