@@ -5,31 +5,14 @@
 
 ![preview](/screenshots/fullpage.png)
 
-<!-- <div>
- <img width="200" src="/screenshots/eated-phone.png"/>
- <img width="204.3" src="/screenshots/weight-phone.png"/>
- <img width="204.3" src="/screenshots/period-phone.png"/>
-
-</div> -->
-
-<div align="center">
-    <table>
-    <tr>
-        <td><img width="200" src="/screenshots/eated-phone.png"/></td>
-        <td><img width="204.3" src="/screenshots/weight-phone.png"/></td>
-        <td><img width="204.3" src="/screenshots/period-phone.png"/></td>
-    </tr>
-    </table>
-</div>
+<table>
+<tr>
+<td><img width="200" src="/screenshots/eated-phone.png"/></td>
+<td><img width="204.3" src="/screenshots/weight-phone.png"/></td>
+<td><img width="204.3" src="/screenshots/period-phone.png"/></td>
+</tr>
+</table>
 
 ## Stack
 
     vue3, vuex, vue-router, jest, scss, vee-validate, axios, etc.
-
-<style>
-    .image-container {
-        display: flex;
-        justify-content: space-between;
-
-    }
-</style>
